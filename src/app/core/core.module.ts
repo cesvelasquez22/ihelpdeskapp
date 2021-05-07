@@ -4,13 +4,15 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { MatIconRegistry } from '@angular/material/icon';
 import { AuthService } from 'app/core/auth/auth.service';
 import { AuthInterceptor } from 'app/core/auth/auth.interceptor';
+import { FirebaseAuthService } from './auth/firebase.auth';
 
 @NgModule({
     imports  : [
-        HttpClientModule
+        HttpClientModule,
     ],
     providers: [
         AuthService,
+        FirebaseAuthService,
         {
             provide : HTTP_INTERCEPTORS,
             useClass: AuthInterceptor,
