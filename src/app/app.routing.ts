@@ -7,6 +7,7 @@ import { AngularFireAuthGuard, canActivate } from '@angular/fire/auth-guard';
 import { LayoutComponent } from 'app/layout/layout.component';
 import { InitialDataResolver } from 'app/app.resolvers';
 import { redirectUnauthorizedToLogin } from './core/auth/angular-fire.pipes';
+import { FirebaseAuthGuard } from './core/auth/guards/firebase-auth.guard';
 
 // @formatter:off
 // tslint:disable:max-line-length
@@ -71,7 +72,7 @@ export const appRoutes: Route[] = [
     // Admin routes
     {
         path       : '',
-        canActivate: [AngularFireAuthGuard],
+        canActivate: [FirebaseAuthGuard],
         component  : LayoutComponent,
         resolve    : {
             initialData: InitialDataResolver,
