@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "help-desk-fb557": {
+      "hosting": {
+        "fuse": [
+          "help-desk-fb557"
+        ]
+      }
+    }
+  }
+}

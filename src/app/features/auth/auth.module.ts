@@ -14,11 +14,16 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { FuseAlertModule } from '@fuse/components/alert';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { FuseCardModule } from '@fuse/components/card';
+import { SignOutComponent } from './components/sign-out/sign-out.component';
+import { ConfirmationRequiredComponent } from './components/confirmation-required/confirmation-required.component';
 
 @NgModule({
   declarations: [
     SignUpComponent,
-    SignInComponent
+    SignInComponent,
+    SignOutComponent,
+    ConfirmationRequiredComponent,
   ],
   imports: [
     CommonModule,
@@ -27,6 +32,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
     // Fuse
     FuseAlertModule,
+    FuseCardModule,
 
     // Material
     MatButtonModule,

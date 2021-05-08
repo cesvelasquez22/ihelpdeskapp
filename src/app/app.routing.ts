@@ -1,8 +1,12 @@
 import { Route } from '@angular/router';
-import { AuthGuard } from 'app/core/auth/guards/auth.guard';
 import { NoAuthGuard } from 'app/core/auth/guards/noAuth.guard';
+
+// Angular Fire Auth Guard
+import { AngularFireAuthGuard, canActivate } from '@angular/fire/auth-guard';
+
 import { LayoutComponent } from 'app/layout/layout.component';
 import { InitialDataResolver } from 'app/app.resolvers';
+import { redirectUnauthorizedToLogin } from './core/auth/angular-fire.pipes';
 
 // @formatter:off
 // tslint:disable:max-line-length
@@ -38,19 +42,19 @@ export const appRoutes: Route[] = [
     },
 
     // Auth routes for authenticated users
-    {
-        path: '',
-        canActivate: [AuthGuard],
-        canActivateChild: [AuthGuard],
-        component: LayoutComponent,
-        data: {
-            layout: 'empty'
-        },
-        children: [
-            {path: 'sign-out', loadChildren: () => import('app/modules/auth/sign-out/sign-out.module').then(m => m.AuthSignOutModule)},
-            {path: 'unlock-session', loadChildren: () => import('app/modules/auth/unlock-session/unlock-session.module').then(m => m.AuthUnlockSessionModule)}
-        ]
-    },
+    // {
+    //     path: '',
+    //     canActivate: [AuthGuard],
+    //     canActivateChild: [AuthGuard],
+    //     component: LayoutComponent,
+    //     data: {
+    //         layout: 'empty'
+    //     },
+    //     children: [
+    //         {path: 'sign-out', loadChildren: () => import('app/modules/auth/sign-out/sign-out.module').then(m => m.AuthSignOutModule)},
+    //         {path: 'unlock-session', loadChildren: () => import('app/modules/auth/unlock-session/unlock-session.module').then(m => m.AuthUnlockSessionModule)}
+    //     ]
+    // },
 
     // Landing routes
     {
@@ -67,14 +71,13 @@ export const appRoutes: Route[] = [
     // Admin routes
     {
         path       : '',
-        canActivate: [AuthGuard],
-        canActivateChild: [AuthGuard],
+        canActivate: [AngularFireAuthGuard],
         component  : LayoutComponent,
         resolve    : {
             initialData: InitialDataResolver,
         },
         children   : [
-            {path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule)},
+            {path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule), ...canActivate(redirectUnauthorizedToLogin)},
         ]
     }
 ];
