@@ -8,6 +8,7 @@ import { LayoutComponent } from 'app/layout/layout.component';
 import { InitialDataResolver } from 'app/app.resolvers';
 import { redirectUnauthorizedToLogin } from './core/auth/angular-fire.pipes';
 import { FirebaseAuthGuard } from './core/auth/guards/firebase-auth.guard';
+import { ModernLayoutComponent } from './layout/layouts/horizontal/modern/modern.component';
 
 // @formatter:off
 // tslint:disable:max-line-length
@@ -61,8 +62,8 @@ export const appRoutes: Route[] = [
     {
         path: '',
         component: LayoutComponent,
-        data: {
-            layout: 'empty'
+        resolve: {
+            initialData: InitialDataResolver,
         },
         children: [
             { path: 'home', loadChildren: () => import('./features/landing/landing.module').then(m => m.LandingModule) },
