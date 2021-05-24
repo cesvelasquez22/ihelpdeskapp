@@ -67,13 +67,13 @@ export const appRoutes: Route[] = [
             initialData: LandingResolver,
         },
         children: [
-            { path: 'home', loadChildren: () => import('./features/landing/landing.module').then(m => m.LandingModule) },
+            { path: '', loadChildren: () => import('./features/landing/landing.module').then(m => m.LandingModule) },
         ]
     },
 
     // Admin routes
     {
-        path: '',
+        path: 'auth',
         canActivate: [FirebaseAuthGuard],
         component: LayoutComponent,
         resolve: {
