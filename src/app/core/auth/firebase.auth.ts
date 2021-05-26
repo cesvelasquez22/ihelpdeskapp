@@ -1,5 +1,6 @@
 import { Injectable } from "@angular/core";
 import { AngularFireAuth } from "@angular/fire/auth";
+import { Router } from "@angular/router";
 import { map } from "rxjs/operators";
 import { IUser } from "../user/user.model";
 import { UserService } from "../user/user.service";
@@ -9,6 +10,7 @@ export class FirebaseAuthService {
     constructor(
         private afAuth: AngularFireAuth,
         private userService: UserService,
+        private router: Router,
     ) {}
 
     isLoggedIn$() {
@@ -35,6 +37,7 @@ export class FirebaseAuthService {
     async signOut(): Promise<void> {
         try {
             await this.afAuth.signOut();
+            this.router.navigate(['/sign-out']);
         } catch (error) {}
     }
 }

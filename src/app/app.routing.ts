@@ -8,20 +8,22 @@ import { LayoutComponent } from 'app/layout/layout.component';
 import { InitialDataResolver } from 'app/app.resolvers';
 import { redirectUnauthorizedToLogin } from './core/auth/angular-fire.pipes';
 import { FirebaseAuthGuard } from './core/auth/guards/firebase-auth.guard';
+import { ModernLayoutComponent } from './layout/layouts/horizontal/modern/modern.component';
+import { LandingResolver } from './core/resolvers/landing.resolver';
 
 // @formatter:off
 // tslint:disable:max-line-length
 export const appRoutes: Route[] = [
 
-    // Redirect empty path to '/example'
-    {path: '', pathMatch : 'full', redirectTo: 'example'},
+    // Redirect empty path to '/dashboard'
+    { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
 
-    // Redirect signed in user to the '/example'
+    // Redirect signed in user to the '/dashboard'
     //
     // After the user signs in, the sign in page will redirect the user to the 'signed-in-redirect'
     // path. Below is another redirection for that path to redirect the user to the desired
     // location. This is a small convenience to keep all main routes together here on this file.
-    {path: 'signed-in-redirect', pathMatch : 'full', redirectTo: 'example'},
+    { path: 'signed-in-redirect', pathMatch: 'full', redirectTo: 'dashboard' },
 
     // Auth routes for guests
     {
@@ -60,25 +62,25 @@ export const appRoutes: Route[] = [
     // Landing routes
     {
         path: '',
-        component  : LayoutComponent,
-        data: {
-            layout: 'empty'
+        component: LayoutComponent,
+        resolve: {
+            initialData: LandingResolver,
         },
-        children   : [
-            {path: 'home', loadChildren: () => import('app/modules/landing/home/home.module').then(m => m.LandingHomeModule)},
+        children: [
+            { path: '', loadChildren: () => import('./features/landing/landing.module').then(m => m.LandingModule) },
         ]
     },
 
     // Admin routes
     {
-        path       : '',
+        path: '',
         canActivate: [FirebaseAuthGuard],
-        component  : LayoutComponent,
-        resolve    : {
+        component: LayoutComponent,
+        resolve: {
             initialData: InitialDataResolver,
         },
-        children   : [
-            {path: 'example', loadChildren: () => import('app/modules/admin/example/example.module').then(m => m.ExampleModule), ...canActivate(redirectUnauthorizedToLogin)},
+        children: [
+            { path: 'dashboard', loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule), ...canActivate(redirectUnauthorizedToLogin) },
         ]
     }
 ];

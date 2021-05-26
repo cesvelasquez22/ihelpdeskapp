@@ -26,7 +26,6 @@ import { ConfirmationRequiredComponent } from './components/confirmation-require
     ConfirmationRequiredComponent,
   ],
   imports: [
-    CommonModule,
     AuthRoutingModule,
     SharedModule,
 

@@ -5,6 +5,7 @@ import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { User } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
+import { FirebaseAuthService } from 'app/core/auth/firebase.auth';
 
 @Component({
     selector       : 'user-menu',
@@ -27,8 +28,8 @@ export class UserMenuComponent implements OnInit, OnDestroy
      */
     constructor(
         private _changeDetectorRef: ChangeDetectorRef,
-        private _router: Router,
-        private _userService: UserService
+        private _userService: UserService,
+        private firebaseAuthService: FirebaseAuthService,
     )
     {
     }
@@ -92,6 +93,6 @@ export class UserMenuComponent implements OnInit, OnDestroy
      */
     signOut(): void
     {
-        this._router.navigate(['/sign-out']);
+        this.firebaseAuthService.signOut();
     }
 }

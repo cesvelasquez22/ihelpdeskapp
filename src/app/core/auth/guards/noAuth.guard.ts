@@ -3,6 +3,7 @@ import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanLoad, Route, 
 import { Observable, of } from 'rxjs';
 import { AuthService } from 'app/core/auth/auth.service';
 import { switchMap } from 'rxjs/operators';
+import { FirebaseAuthService } from '../firebase.auth';
 
 @Injectable({
     providedIn: 'root'
@@ -14,7 +15,8 @@ export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad
      */
     constructor(
         private _authService: AuthService,
-        private _router: Router
+        private _router: Router,
+        private firebaseAuthService: FirebaseAuthService,
     )
     {
     }
@@ -31,10 +33,9 @@ export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad
     private _check(): Observable<boolean>
     {
         // Check the authentication status
-        return this._authService.check()
+        return this.firebaseAuthService.isLoggedIn$()
                    .pipe(
                        switchMap((authenticated) => {
-
                            // If the user is authenticated...
                            if ( authenticated )
                            {
