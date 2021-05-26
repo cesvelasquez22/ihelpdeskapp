@@ -10,7 +10,7 @@ export const landingNavigation: FuseNavigationItem[] = [
     },
     {
         id: 'about',
-        title: 'Sobre nosotros',
+        title: 'Sobre nosotrosA',
         type: 'basic',
         icon: 'mat_outline:group',
         link: 'about',
