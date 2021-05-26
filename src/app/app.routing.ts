@@ -73,7 +73,7 @@ export const appRoutes: Route[] = [
 
     // Admin routes
     {
-        path: 'auth',
+        path: '',
         canActivate: [FirebaseAuthGuard],
         component: LayoutComponent,
         resolve: {

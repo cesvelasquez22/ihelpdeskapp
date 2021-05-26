@@ -53,6 +53,7 @@ export class ModernLayoutComponent implements OnInit, OnDestroy
         // Subscribe to the resolved route mock-api
         this._activatedRoute.data.subscribe((data: Data) => {
             this.data = data.initialData;
+            console.log(this.data);
         });
 
         // Subscribe to media changes
