@@ -55,12 +55,15 @@
         </ng-container>
         <!-- Components -->
         <div class="flex items-center pl-2 ml-auto space-x-2">
+            <div class="flex items-center" *ngIf="data.auth">
+                <button class="rounded-md" mat-stroked-button routerLink="sign-up">Registrarse</button>
+                <button class="rounded-md ml-2" mat-raised-button [color]="'primary'" routerLink="sign-in">Iniciar sesión</button>
+            </div>
             <search [appearance]="'bar'"></search>
             <shortcuts *ngIf="data.shortcuts" [shortcuts]="data.shortcuts"></shortcuts>
             <messages *ngIf="data.messages" [messages]="data.messages"></messages>
             <notifications *ngIf="data.notifications" [notifications]="data.notifications"></notifications>
             <user-menu *ngIf="data.user"></user-menu>
-            <ng-content></ng-content>
         </div>
     </div>
 

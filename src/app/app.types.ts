@@ -16,4 +16,5 @@ export interface InitialData
     notifications: Notification[];
     shortcuts: Shortcut[];
     user: User;
+    auth?: boolean;
 }
