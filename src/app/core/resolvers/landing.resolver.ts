@@ -19,7 +19,6 @@ export class LandingResolver implements Resolve<any> {
                     default: navigation.default,
                     horizontal: navigation.horizontal,
                 },
-                auth: true,
             }))
         )
     }

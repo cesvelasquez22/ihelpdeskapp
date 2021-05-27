@@ -8,7 +8,6 @@ import { LayoutComponent } from 'app/layout/layout.component';
 import { InitialDataResolver } from 'app/app.resolvers';
 import { redirectUnauthorizedToLogin } from './core/auth/angular-fire.pipes';
 import { FirebaseAuthGuard } from './core/auth/guards/firebase-auth.guard';
-import { ModernLayoutComponent } from './layout/layouts/horizontal/modern/modern.component';
 import { LandingResolver } from './core/resolvers/landing.resolver';
 
 // @formatter:off
@@ -16,7 +15,7 @@ import { LandingResolver } from './core/resolvers/landing.resolver';
 export const appRoutes: Route[] = [
 
     // Redirect empty path to '/dashboard'
-    { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
+    { path: '', pathMatch: 'full', redirectTo: 'home' },
 
     // Redirect signed in user to the '/dashboard'
     //
@@ -31,9 +30,13 @@ export const appRoutes: Route[] = [
         canActivate: [NoAuthGuard],
         canActivateChild: [NoAuthGuard],
         component: LayoutComponent,
-        data: {
-            layout: 'empty'
+        // data: {
+        //     layout: 'empty'
+        // },
+        resolve: {
+            initialData: LandingResolver,
         },
+        data: { showAuth: false },
         loadChildren: () => import('./features/auth/auth.module').then((m) => m.AuthModule),
         // children: [
         //     {path: 'confirmation-required', loadChildren: () => import('app/modules/auth/confirmation-required/confirmation-required.module').then(m => m.AuthConfirmationRequiredModule)},
@@ -66,6 +69,7 @@ export const appRoutes: Route[] = [
         resolve: {
             initialData: LandingResolver,
         },
+        data: { showAuth: true },
         children: [
             { path: '', loadChildren: () => import('./features/landing/landing.module').then(m => m.LandingModule) },
         ]

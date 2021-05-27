@@ -14,6 +14,7 @@ import { InitialData } from 'app/app.types';
 export class ModernLayoutComponent implements OnInit, OnDestroy
 {
     data: InitialData;
+    showAuth: boolean;
     isScreenSmall: boolean;
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -53,7 +54,7 @@ export class ModernLayoutComponent implements OnInit, OnDestroy
         // Subscribe to the resolved route mock-api
         this._activatedRoute.data.subscribe((data: Data) => {
             this.data = data.initialData;
-            console.log(this.data);
+            this.showAuth = data.showAuth;
         });
 
         // Subscribe to media changes

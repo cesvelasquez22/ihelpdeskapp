@@ -55,7 +55,7 @@
         </ng-container>
         <!-- Components -->
         <div class="flex items-center pl-2 ml-auto space-x-2">
-            <div class="flex items-center" *ngIf="data.auth">
+            <div class="flex items-center" *ngIf="showAuth">
                 <button class="rounded-md" mat-stroked-button routerLink="sign-up">Registrarse</button>
                 <button class="rounded-md ml-2" mat-raised-button [color]="'primary'" routerLink="sign-in">Iniciar sesión</button>
             </div>
