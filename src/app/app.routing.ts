@@ -6,7 +6,7 @@ import { AngularFireAuthGuard, canActivate } from '@angular/fire/auth-guard';
 
 import { LayoutComponent } from 'app/layout/layout.component';
 import { InitialDataResolver } from 'app/app.resolvers';
-import { redirectUnauthorizedToLogin } from './core/auth/angular-fire.pipes';
+import { redirectUnauthorizedToHome } from './core/auth/angular-fire.pipes';
 import { FirebaseAuthGuard } from './core/auth/guards/firebase-auth.guard';
 import { LandingResolver } from './core/resolvers/landing.resolver';
 
@@ -84,7 +84,7 @@ export const appRoutes: Route[] = [
             initialData: InitialDataResolver,
         },
         children: [
-            { path: 'dashboard', loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule), ...canActivate(redirectUnauthorizedToLogin) },
+            { path: 'dashboard', loadChildren: () => import('./features/dashboard/dashboard.module').then(m => m.DashboardModule) },
         ]
     }
 ];

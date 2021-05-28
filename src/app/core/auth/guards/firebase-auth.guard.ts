@@ -22,7 +22,7 @@ export class FirebaseAuthGuard implements CanActivate, CanActivateChild, CanLoad
           // If the user is not authenticated...
           if (!authenticated) {
             // Redirect to the sign-in page
-            this.router.navigate(['sign-in'], { queryParams: { redirectURL } });
+            this.router.navigate(['home'], { queryParams: { redirectURL } });
 
             // Prevent the access
             return of(false);
