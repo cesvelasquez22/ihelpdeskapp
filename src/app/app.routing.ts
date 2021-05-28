@@ -15,7 +15,7 @@ import { LandingResolver } from './core/resolvers/landing.resolver';
 export const appRoutes: Route[] = [
 
     // Redirect empty path to '/dashboard'
-    { path: '', pathMatch: 'full', redirectTo: 'home' },
+    { path: '', pathMatch: 'full', redirectTo: 'dashboard' },
 
     // Redirect signed in user to the '/dashboard'
     //
