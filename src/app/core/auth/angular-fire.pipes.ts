@@ -1,4 +1,4 @@
-import { hasCustomClaim, redirectLoggedInTo, redirectUnauthorizedTo } from "@angular/fire/auth-guard";
+import { hasCustomClaim, redirectLoggedInTo, redirectUnauthorizedTo } from '@angular/fire/auth-guard';
 
 export const adminOnly = (claim) => hasCustomClaim(claim);
 export const redirectUnauthorizedToLogin = () => redirectUnauthorizedTo(['sign-in']);
