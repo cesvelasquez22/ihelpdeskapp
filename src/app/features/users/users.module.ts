@@ -8,6 +8,7 @@ import { RoleDetailComponent } from './components/role-detail/role-detail.compon
 import { UserDetailComponent } from './components/user-detail/user-detail.component';
 import { UsersService } from './services/users.service';
 import { RolesService } from './services/roles.service';
+import { SharedModule } from 'app/shared/shared.module';
 
 
 @NgModule({
@@ -19,7 +20,8 @@ import { RolesService } from './services/roles.service';
   ],
   imports: [
     CommonModule,
-    UsersRoutingModule
+    UsersRoutingModule,
+    SharedModule,
   ],
   providers: [UsersService, RolesService],
 })

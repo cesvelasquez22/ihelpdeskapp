@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
+import { TitleHeader } from 'app/core/models/title-header.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { Role } from '../../models/role.interface';
@@ -10,6 +11,13 @@ import { RolesService } from '../../services/roles.service';
   styleUrls: ['./roles.component.scss']
 })
 export class RolesComponent implements OnInit, OnDestroy {
+  // Header
+  titleHeader: TitleHeader = {
+    module: 'Seguridad',
+    overview: 'Listado',
+    title: 'Roles',
+  };
+
   roles: Role[] = [];
 
   private unsubscribe$ = new Subject<void>();

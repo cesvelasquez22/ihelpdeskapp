@@ -1,6 +1,7 @@
-<div class="overflow-x-hidden">
-    <div class="min-w-screen min-h-screen bg-gray-100 flex items-center justify-center bg-gray-100 font-sans overflow-hidden">
-        <div class="w-full lg:w-5/6">
+<div class="overflow-x-hidden min-w-screen min-h-screen">
+    <app-title-header [titleHeader]="titleHeader"></app-title-header>
+    <div class=" bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
+        <div class="w-full lg:w-5/6 mt-4">
             <button class="flex text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" routerLink="create">Nuevo</button>
             <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
                 <table class="min-w-max w-full table-auto">

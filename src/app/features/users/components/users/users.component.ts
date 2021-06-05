@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TitleHeader } from 'app/core/models/title-header.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { User } from '../../models/user.interface';
@@ -10,6 +11,13 @@ import { UsersService } from '../../services/users.service';
     styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+    // Header
+    titleHeader: TitleHeader = {
+        module: 'Seguridad',
+        overview: 'Listado',
+        title: 'Usuarios',
+    };
+    
     users: User[] = [];
 
     private unsubscribe$ = new Subject<void>();
