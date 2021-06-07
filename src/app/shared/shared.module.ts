@@ -5,6 +5,7 @@ import { TitleHeaderComponent } from './ui/title-header/title-header.component';
 
 // Material
 import { MatIconModule } from '@angular/material/icon';
+import { StarsComponent } from './ui/stars/stars.component';
 
 @NgModule({
     imports: [CommonModule, FormsModule, ReactiveFormsModule, MatIconModule],
@@ -13,7 +14,8 @@ import { MatIconModule } from '@angular/material/icon';
         FormsModule,
         ReactiveFormsModule,
         TitleHeaderComponent,
+        StarsComponent,
     ],
-    declarations: [TitleHeaderComponent],
+    declarations: [TitleHeaderComponent, StarsComponent],
 })
 export class SharedModule {}
