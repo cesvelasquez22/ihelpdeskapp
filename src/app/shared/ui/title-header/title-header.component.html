@@ -1,0 +1,29 @@
+<!-- Header -->
+<div class="flex flex-0 items-center justify-between p-6 bg-white dark:bg-transparent">
+    <div *ngIf="titleHeader.back" class="flex items-center justify-start leading-6 text-primary mr-4 hover:underline">
+        <button mat-icon-button [routerLink]="['..']">
+            <mat-icon class="text-current" [svgIcon]="'mat_outline:arrow_back'"></mat-icon>
+        </button>
+    </div>
+    <div class="flex-1 min-w-0">
+        <!-- Breadcrumbs -->
+        <div>
+            <div class="hidden sm:flex flex-wrap items-center font-medium">
+                <div class="flex items-center whitespace-nowrap">
+                    <a class="ml-1 text-primary-500">{{ titleHeader.module }}</a>
+                </div>
+                <div class="flex items-center ml-1 whitespace-nowrap">
+                    <mat-icon class="icon-size-5 text-secondary" [svgIcon]="'heroicons_solid:chevron-right'"></mat-icon>
+                    <span class="ml-1 text-secondary">{{ titleHeader.overview }}</span>
+                </div>
+            </div>
+        </div>
+        <!-- Title -->
+        <div class="mt-2">
+            <h2 class="text-3xl md:text-4xl font-extrabold tracking-tight leading-7 sm:leading-10 truncate">
+                {{ titleHeader.title }}
+            </h2>
+        </div>
+    </div>
+    <ng-content></ng-content>
+</div>

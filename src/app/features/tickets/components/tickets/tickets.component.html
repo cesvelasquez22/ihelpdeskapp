@@ -1,1 +1,52 @@
-<p>tickets works!</p>
+<div class="overflow-x-hidden min-w-screen min-h-screen">
+    <app-title-header [titleHeader]="titleHeader">
+        <button class="ml-4" mat-flat-button [color]="'primary'" routerLink="create" (click)="(null)">
+            <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+            <span class="ml-2 mr-1">Agregar</span>
+        </button>
+    </app-title-header>
+    <div class=" bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
+        <div class="w-full lg:w-5/6">
+            <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
+                <table class="min-w-max w-full table-auto">
+                    <thead>
+                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
+                            <th class="py-3 px-6 text-left">Departamento</th>
+                            <th class="py-3 px-6 text-left">Asunto</th>
+                            <th class="py-3 px-6 text-left">Cliente emisor</th>
+                            <th class="py-3 px-6 text-left">Categoria</th>
+                            <th class="py-3 px-6 text-left">Prioridad</th>
+                        </tr>
+                    </thead>
+                    <tbody class="text-gray-600 text-sm font-light">
+                        <tr class="border-b border-gray-200 hover:bg-gray-100" *ngFor="let ticket of tickets">
+                            <td class="py-3 px-6 text-left whitespace-nowrap">
+                                <div class="flex items-center">
+                                    <span class="font-medium">{{ ticket.department.name }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center">
+                                    <span>{{ ticket.subject }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center">
+                                    <span>{{ ticket.customer }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <div class="flex items-center">
+                                    <span>{{ ticket.category }}</span>
+                                </div>
+                            </td>
+                            <td class="py-3 px-6 text-center">
+                                <app-stars [count]="3" [value]="ticket.priority.value"></app-stars>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
