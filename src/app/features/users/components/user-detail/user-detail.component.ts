@@ -13,6 +13,7 @@ export class UserDetailComponent implements OnInit {
         module: 'Seguridad',
         overview: 'Detalle de usuarios',
         title: 'Usuarios',
+        back: true,
     };
 
     form: FormGroup;

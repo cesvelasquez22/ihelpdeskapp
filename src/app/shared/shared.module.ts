@@ -6,12 +6,14 @@ import { TitleHeaderComponent } from './ui/title-header/title-header.component';
 // Material
 import { MatIconModule } from '@angular/material/icon';
 import { StarsComponent } from './ui/stars/stars.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
-    imports: [CommonModule, FormsModule, ReactiveFormsModule, MatIconModule],
+    imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule, MatIconModule],
     exports: [
         CommonModule,
         FormsModule,
+        RouterModule,
         ReactiveFormsModule,
         TitleHeaderComponent,
         StarsComponent,

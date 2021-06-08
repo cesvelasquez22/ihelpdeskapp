@@ -12,6 +12,7 @@ export class DepartmentDetailComponent implements OnInit {
     module: 'Mantenimientos',
     overview : 'Detalle del departamento',
     title: 'Departamentos',
+    back: true,
   }
 
   constructor() { }

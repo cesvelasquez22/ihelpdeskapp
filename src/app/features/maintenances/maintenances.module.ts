@@ -7,6 +7,8 @@ import { DepartmentDetailComponent } from './components/department-detail/depart
 import { DepartmentsService } from './services/departments.service';
 import { SharedModule } from 'app/shared/shared.module';
 
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
   declarations: [
@@ -17,6 +19,10 @@ import { SharedModule } from 'app/shared/shared.module';
     CommonModule,
     MaintenancesRoutingModule,
     SharedModule,
+
+    // Material
+    MatIconModule,
+    MatButtonModule,
   ],
   providers: [DepartmentsService],
 })

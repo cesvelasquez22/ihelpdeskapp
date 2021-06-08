@@ -11,6 +11,7 @@ export class RoleDetailComponent implements OnInit {
     module: 'Seguridad',
     overview: 'Detalle de roles',
     title: 'Roles',
+    back: true,
   };
 
 

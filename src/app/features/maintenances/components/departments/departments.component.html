@@ -1,8 +1,12 @@
 <div class="overflow-x-hidden min-w-screen min-h-screen">
-    <app-title-header [titleHeader]="titleHeader"></app-title-header>
+    <app-title-header [titleHeader]="titleHeader">
+        <button class="ml-4" mat-flat-button [color]="'primary'" routerLink="create">
+            <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
+            <span class="ml-2 mr-1">Agregar</span>
+        </button>
+    </app-title-header>
     <div class="bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
         <div class="w-full lg:w-5/6 mt-4">
-            <button class="flex text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg" routerLink="create">Nuevo</button>
             <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
                 <table class="min-w-max w-full table-auto">
                     <thead>
