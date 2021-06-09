@@ -1,6 +1,6 @@
 export interface Role {
     uid: string;
-    role: string;
+    name: string;
     createdAt: firebase.default.firestore.Timestamp;
     active: boolean;
 }
