@@ -7,6 +7,7 @@ import { TitleHeaderComponent } from './ui/title-header/title-header.component';
 import { MatIconModule } from '@angular/material/icon';
 import { StarsComponent } from './ui/stars/stars.component';
 import { RouterModule } from '@angular/router';
+import { LoadingOverlayComponent } from './ui/loading-overlay/loading-overlay.component';
 
 @NgModule({
     imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterModule, MatIconModule],
@@ -17,7 +18,8 @@ import { RouterModule } from '@angular/router';
         ReactiveFormsModule,
         TitleHeaderComponent,
         StarsComponent,
+        LoadingOverlayComponent,
     ],
-    declarations: [TitleHeaderComponent, StarsComponent],
+    declarations: [TitleHeaderComponent, StarsComponent, LoadingOverlayComponent],
 })
 export class SharedModule {}
