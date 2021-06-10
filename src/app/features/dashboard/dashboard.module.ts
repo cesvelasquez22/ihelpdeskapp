@@ -6,7 +6,8 @@ import { SharedModule } from 'app/shared/shared.module';
 // Material
 import { MatMenuModule } from '@angular/material/menu'
 import { MatIconModule } from '@angular/material/icon'
-import { MatButtonModule } from '@angular/material/button'
+import { MatButtonModule } from '@angular/material/button';
+import { DeptCardComponent } from './dept-card/dept-card.component'
 
 const routes: Routes = [
   {
@@ -16,7 +17,8 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [
-    DashboardComponent
+    DashboardComponent,
+    DeptCardComponent
   ],
   imports: [
     SharedModule,
