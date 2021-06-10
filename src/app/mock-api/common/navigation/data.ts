@@ -28,6 +28,12 @@ export const defaultNavigation: FuseNavigationItem[] = [
                 type: 'basic',
                 link: '/maintenances/departments',
             },
+            {
+                id: 'maintenances.categories',
+                title: 'Categorías de tickets',
+                type: 'basic',
+                link: '/maintenances/categories',
+            },
         ],
     },
     {
@@ -77,6 +83,12 @@ export const compactNavigation: FuseNavigationItem[] = [
                 title: 'Departamentos',
                 type: 'basic',
                 link: '/maintenances/departments',
+            },
+            {
+                id: 'maintenances.categories',
+                title: 'Categorías de tickets',
+                type: 'basic',
+                link: '/maintenances/categories',
             },
         ],
     },
@@ -128,6 +140,12 @@ export const futuristicNavigation: FuseNavigationItem[] = [
                 type: 'basic',
                 link: '/maintenances/departments',
             },
+            {
+                id: 'maintenances.categories',
+                title: 'Categorías de tickets',
+                type: 'basic',
+                link: '/maintenances/categories',
+            },
         ],
     },
     {
@@ -177,6 +195,12 @@ export const horizontalNavigation: FuseNavigationItem[] = [
                 title: 'Departamentos',
                 type: 'basic',
                 link: '/maintenances/departments',
+            },
+            {
+                id: 'maintenances.categories',
+                title: 'Categorías de tickets',
+                type: 'basic',
+                link: '/maintenances/categories',
             },
         ],
     },

@@ -1,12 +1,14 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { DepartmentDetailComponent } from './components/department-detail/department-detail.component';
+import { CategoriesComponent } from './components/categories/categories.component';
 import { DepartmentsComponent } from './components/departments/departments.component';
 
 const routes: Routes = [
+  // DEPARTMENTS
   { path: 'departments', component: DepartmentsComponent },
-  { path: 'departments/create', component: DepartmentDetailComponent },
-  { path: 'departments/:id', component: DepartmentDetailComponent },
+
+  // CATEGORIES
+  { path: 'categories', component: CategoriesComponent },
 ];
 
 @NgModule({

@@ -13,8 +13,6 @@ const routes: Routes = [
 
   // ROLES
   { path: 'roles', component: RolesComponent },
-  { path: 'roles/create', component: RoleDetailComponent },
-  { path: 'roles/:id', component: RoleDetailComponent },
 ];
 
 @NgModule({
