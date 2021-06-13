@@ -1,11 +1,13 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
+import { environment } from 'environments/environment';
 import { map } from 'rxjs/operators';
 import { User } from '../models/user.interface';
 
 @Injectable()
 export class UsersService {
-    constructor(private afs: AngularFirestore) {}
+    constructor(private afs: AngularFirestore, private http: HttpClient) {}
 
     getAllUsers() {
         return this.afs
@@ -31,7 +33,9 @@ export class UsersService {
     }
 
     updateUser(user: User) {
-        const userDocRef = this.afs.collection('users').doc(user.uid);
-        return userDocRef.update(user);
+        return this.http.put<User>(
+            `${environment.CF_URL}/users-updateUser`,
+            user
+        );
     }
 }

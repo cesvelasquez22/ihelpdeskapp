@@ -10,6 +10,16 @@ import { UsersService } from '../../services/users.service';
     styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
+<<<<<<< Updated upstream
+=======
+    // Header
+    titleHeader: TitleHeader = {
+        module: 'Seguridad',
+        overview: 'Listado',
+        title: 'Usuarios',
+    };
+
+>>>>>>> Stashed changes
     users: User[] = [];
 
     private unsubscribe$ = new Subject<void>();
