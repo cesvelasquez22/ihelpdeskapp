@@ -8,12 +8,13 @@ export interface User
 }
 
 export interface IUser {
-    uid: string;
-    email: string;
-    displayName: string;
-    password: string;
-    role: string;
-    active: boolean;
+    uid?: string;
+    email?: string;
+    password?: string;
+    displayName?: string;
+    photoURL?: string;
+    role?: string;
+    active?: boolean;
 }
 
 export interface IUserRole {

@@ -9,4 +9,10 @@ export const environment = {
         appId: "1:596827481065:web:28317d4d34dc266b6da178",
         measurementId: "G-0GSJ43WEND"
     },
+    // LOCALLY
+    // API_URL: 'http://localhost:5001/help-desk-fb557/us-central1/api',
+    // CF_URL: 'http://localhost:5001/help-desk-fb557/us-central1',
+
+    API_URL: 'https://us-central1-help-desk-fb557.cloudfunctions.net/api',
+    CF_URL: 'https://us-central1-help-desk-fb557.cloudfunctions.net',
 };
