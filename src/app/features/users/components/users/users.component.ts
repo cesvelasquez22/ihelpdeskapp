@@ -11,13 +11,12 @@ import { UsersService } from '../../services/users.service';
     styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-    // Header
+// Header
     titleHeader: TitleHeader = {
         module: 'Seguridad',
         overview: 'Listado',
         title: 'Usuarios',
     };
-    
     users: User[] = [];
 
     private unsubscribe$ = new Subject<void>();
