@@ -20,7 +20,7 @@ export class UserMenuComponent implements OnInit, OnDestroy
 
     @Input() showAvatar: boolean = true;
     user: User;
-    user$: Observable<IUser>;
+    currentUser: IUser;
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -45,7 +45,7 @@ export class UserMenuComponent implements OnInit, OnDestroy
     ngOnInit(): void
     {
         // Get current user
-        this.user$ = this.firebaseAuthService.user$;
+        this.firebaseAuthService.getCurrentUser().then((user) => (this.currentUser = user))
     }
 
     /**
