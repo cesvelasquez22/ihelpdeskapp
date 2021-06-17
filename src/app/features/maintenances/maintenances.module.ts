@@ -12,6 +12,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
 import { CategoriesService } from './services/categories.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 
 @NgModule({
   declarations: [
@@ -28,6 +32,9 @@ import { CategoriesService } from './services/categories.service';
     // Material
     MatIconModule,
     MatButtonModule,
+    MatDialogModule,
+    MatFormFieldModule,
+    MatInputModule,
   ],
   providers: [CategoriesService],
 })
