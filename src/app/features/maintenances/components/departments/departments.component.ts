@@ -57,7 +57,6 @@ listenChangesDepartments() {
       .subscribe((department) => {
           if (department && department !== null) {
               if (department.edit) {
-                  console.log(department);
                   this.updateDepartment(department);
               } else {
                   this.addDepartment(department);

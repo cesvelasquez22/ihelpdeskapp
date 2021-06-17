@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { IzitoastAlertService } from 'app/core/alerts/izitoast-alert.service';
 import { TitleHeader } from 'app/core/models/title-header.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -21,7 +22,7 @@ export class UsersComponent implements OnInit {
     users: User[] = [];
 
     private unsubscribe$ = new Subject<void>();
-    constructor(private userService: UsersService) {}
+    constructor(private userService: UsersService, private izitoastAlertService: IzitoastAlertService) {}
 
     ngOnInit(): void {
         this.getUsers();
@@ -49,7 +50,17 @@ export class UsersComponent implements OnInit {
     }
 
     changeUserStatus(user: User) {
+        this.loading = true;
         user.active = !user.active;
-        this.userService.updateUser(user);
+        this.userService.updateUser(user).subscribe(
+            (userUpdated) => {
+                this.loading = false;
+                this.izitoastAlertService.CustomSuccessAlert('Se ha cambiado el estado del usuario!');
+            },
+            (err) => {
+                this.loading = false;
+                this.izitoastAlertService.CustomErrorAlert('Hubo un error al cambiar el estado');
+            }
+        );
     }
 }

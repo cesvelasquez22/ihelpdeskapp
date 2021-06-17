@@ -58,7 +58,6 @@ export class RolesComponent implements OnInit, OnDestroy {
             .subscribe((role) => {
                 if (role && role !== null) {
                     if (role.edit) {
-                        console.log(role);
                         this.updateRole(role);
                     } else {
                         this.addRole(role);
