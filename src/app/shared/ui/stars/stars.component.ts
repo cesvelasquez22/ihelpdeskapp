@@ -9,7 +9,10 @@ import { Component, Input, OnInit } from '@angular/core';
                     class="text-yellow-400"
                     svgIcon="mat_outline:star"
                 ></mat-icon>
-                <mat-icon *ngFor="let empty of emptyIcons" svgIcon="mat_outline:star_outline"></mat-icon>
+                <mat-icon
+                    *ngFor="let empty of emptyIcons"
+                    svgIcon="mat_outline:star_outline"
+                ></mat-icon>
             </div>
         </div>
     `,
@@ -31,6 +34,5 @@ export class StarsComponent implements OnInit {
                 .fill(this.count - this.value)
                 .map((x, i) => i);
         }
-        console.log(this.fillIcons);
     }
 }

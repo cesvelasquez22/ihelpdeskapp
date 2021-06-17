@@ -16,22 +16,16 @@ export const defaultNavigation: FuseNavigationItem[] = [
         icon: 'mat_outline:sticky_note_2',
         children: [
             {
-                id: 'tickets.new',
-                title: 'Nuevo ticket',
-                type: 'basic',
-                link: '/tickets/create',
-            },
-            {
                 id: 'tickets.my',
                 title: 'Mis tickets',
                 type: 'basic',
                 link: '/tickets/my',
             },
             {
-                id: 'tickets.my',
+                id: 'tickets.to-me',
                 title: 'Asignados a mí',
                 type: 'basic',
-                link: '/tickets/my',
+                link: '/tickets/to-me',
             },
             {
                 id: 'tickets.search',
@@ -104,22 +98,16 @@ export const compactNavigation: FuseNavigationItem[] = [
         icon: 'mat_outline:sticky_note_2',
         children: [
             {
-                id: 'tickets.new',
-                title: 'Nuevo ticket',
-                type: 'basic',
-                link: '/tickets/create',
-            },
-            {
                 id: 'tickets.my',
                 title: 'Mis tickets',
                 type: 'basic',
                 link: '/tickets/my',
             },
             {
-                id: 'tickets.my',
+                id: 'tickets.to-me',
                 title: 'Asignados a mí',
                 type: 'basic',
-                link: '/tickets/my',
+                link: '/tickets/to-me',
             },
             {
                 id: 'tickets.search',
@@ -192,22 +180,16 @@ export const futuristicNavigation: FuseNavigationItem[] = [
         icon: 'mat_outline:sticky_note_2',
         children: [
             {
-                id: 'tickets.new',
-                title: 'Nuevo ticket',
-                type: 'basic',
-                link: '/tickets/create',
-            },
-            {
                 id: 'tickets.my',
                 title: 'Mis tickets',
                 type: 'basic',
                 link: '/tickets/my',
             },
             {
-                id: 'tickets.my',
+                id: 'tickets.to-me',
                 title: 'Asignados a mí',
                 type: 'basic',
-                link: '/tickets/my',
+                link: '/tickets/to-me',
             },
             {
                 id: 'tickets.search',
@@ -280,22 +262,16 @@ export const horizontalNavigation: FuseNavigationItem[] = [
         icon: 'mat_outline:sticky_note_2',
         children: [
             {
-                id: 'tickets.new',
-                title: 'Nuevo ticket',
-                type: 'basic',
-                link: '/tickets/create',
-            },
-            {
                 id: 'tickets.my',
                 title: 'Mis tickets',
                 type: 'basic',
                 link: '/tickets/my',
             },
             {
-                id: 'tickets.my',
+                id: 'tickets.to-me',
                 title: 'Asignados a mí',
                 type: 'basic',
-                link: '/tickets/my',
+                link: '/tickets/to-me',
             },
             {
                 id: 'tickets.search',
