@@ -4,7 +4,7 @@ import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.
 import { TicketsComponent } from './components/tickets/tickets.component';
 
 const routes: Routes = [
-  { path: '', component: TicketsComponent },
+  { path: 'my', component: TicketsComponent },
   { path: 'create', component: TicketDetailComponent },
   { path: ':id', component: TicketDetailComponent },
 ];
