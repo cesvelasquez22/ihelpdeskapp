@@ -11,7 +11,8 @@ import { UsersService } from '../../services/users.service';
     styleUrls: ['./users.component.scss'],
 })
 export class UsersComponent implements OnInit {
-// Header
+    loading = false;
+    // Header
     titleHeader: TitleHeader = {
         module: 'Seguridad',
         overview: 'Listado',
@@ -32,14 +33,19 @@ export class UsersComponent implements OnInit {
     }
 
     getUsers() {
+        this.loading = true;
         this.userService
             .getAllUsers()
             .pipe(takeUntil(this.unsubscribe$))
-            .subscribe((users) => {
-                if (users && users.length > 0) {
-                    this.users = users;
-                }
-            });
+            .subscribe(
+                (users) => {
+                    if (users && users.length > 0) {
+                        this.users = users;
+                    }
+                    this.loading = false;
+                },
+                (err) => (this.loading = false)
+            );
     }
 
     changeUserStatus(user: User) {

@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
+import { IzitoastAlertService } from 'app/core/alerts/izitoast-alert.service';
 import { TitleHeader } from 'app/core/models/title-header.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
@@ -15,6 +16,7 @@ import { UsersService } from '../../services/users.service';
     styleUrls: ['./user-detail.component.scss'],
 })
 export class UserDetailComponent implements OnInit, OnDestroy {
+    loading = false;
     //Header
     titleHeader: TitleHeader = {
         module: 'Seguridad',
@@ -37,7 +39,8 @@ export class UserDetailComponent implements OnInit, OnDestroy {
         private rolesService: RolesService,
         private usersService: UsersService,
         private router: Router,
-        private route: ActivatedRoute
+        private route: ActivatedRoute,
+        private izitoastAlertService: IzitoastAlertService,
     ) {
         this.buildForm();
         this.userUidPath = this.route.snapshot.paramMap.get('id');
@@ -53,10 +56,10 @@ export class UserDetailComponent implements OnInit, OnDestroy {
         });
     }
 
-ngOnInit() {
-  this.getRoles();
-  this.getUserInfo();
-}
+    ngOnInit() {
+        this.getRoles();
+        this.getUserInfo();
+    }
 
     ngOnDestroy() {
         this.unsubscribe$.next();
@@ -64,39 +67,59 @@ ngOnInit() {
     }
 
     getUserInfo() {
+        this.loading = true;
         if (this.userUidPath !== null) {
-            this.usersService
-                .getUserByUid(this.userUidPath)
-                .subscribe((user) => {
+            this.usersService.getUserByUid(this.userUidPath).subscribe(
+                (user) => {
                     this.setInfo(user);
-                });
+                    this.loading = false;
+                },
+                (err) => (this.loading = false)
+            );
         }
     }
 
     getRoles() {
+        this.loading = true;
         this.rolesService
             .getAllRoles()
             .pipe(takeUntil(this.unsubscribe$))
-            .subscribe((roles) => (this.roles = roles));
+            .subscribe(
+                (roles) => {
+                    this.roles = roles;
+                    this.loading = false;
+                },
+                (err) => (this.loading = false)
+            );
     }
 
     setInfo(user: User) {
         this.userForm.get('uid')?.setValue(user.uid);
-        this.userForm.get('role')?.setValue(user.role);
+        this.userForm.get('role')?.setValue(user.role.uid);
         this.userForm.get('displayName')?.setValue(user.displayName);
         this.userForm.get('email')?.setValue(user.email);
         this.userForm.get('active')?.setValue(user.active);
     }
 
     save() {
-        const userData = this.userForm.value as User;
+        this.loading = true;
+        const userData = this.userForm.value;
+        const role = this.roles.find((role) => role.uid === userData.role);
+        const { uid, name } = role;
+        userData.role = { uid, name };
         this.usersService.updateUser(userData).subscribe(
             (user) => {
-                console.log('Usuario actualizado con éxito');
+                this.izitoastAlertService.CustomSuccessAlert(
+                    'El usuario se ha actualizado exitosamente'
+                );
                 this.router.navigate(['/security/users']);
+                this.loading = false;
             },
             (err) => {
-                console.log(err);
+                this.loading = false;
+                this.izitoastAlertService.CustomErrorAlert(
+                    'Hubo un error intentanto actualizar el usuario'
+                );
             }
         );
     }

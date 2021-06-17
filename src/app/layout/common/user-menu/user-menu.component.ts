@@ -1,10 +1,7 @@
-import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectionStrategy, Component, Input, OnDestroy, OnInit, ViewEncapsulation } from '@angular/core';
 import { BooleanInput } from '@angular/cdk/coercion';
-import { Observable, Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { IUser, User } from 'app/core/user/user.model';
-import { UserService } from 'app/core/user/user.service';
+import { Subject } from 'rxjs';
+import { IUser } from 'app/core/user/user.model';
 import { FirebaseAuthService } from 'app/core/auth/firebase.auth';
 
 @Component({
@@ -19,7 +16,6 @@ export class UserMenuComponent implements OnInit, OnDestroy
     static ngAcceptInputType_showAvatar: BooleanInput;
 
     @Input() showAvatar: boolean = true;
-    user: User;
     currentUser: IUser;
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
@@ -28,8 +24,6 @@ export class UserMenuComponent implements OnInit, OnDestroy
      * Constructor
      */
     constructor(
-        private _changeDetectorRef: ChangeDetectorRef,
-        private _userService: UserService,
         private firebaseAuthService: FirebaseAuthService,
     )
     {
@@ -56,30 +50,6 @@ export class UserMenuComponent implements OnInit, OnDestroy
         // Unsubscribe from all subscriptions
         this._unsubscribeAll.next();
         this._unsubscribeAll.complete();
-    }
-
-    // -----------------------------------------------------------------------------------------------------
-    // @ Public methods
-    // -----------------------------------------------------------------------------------------------------
-
-    /**
-     * Update the user status
-     *
-     * @param status
-     */
-    updateUserStatus(status: string): void
-    {
-        // Return if user is not available
-        if ( !this.user )
-        {
-            return;
-        }
-
-        // Update the user
-        this._userService.update({
-            ...this.user,
-            status
-        }).subscribe();
     }
 
     /**

@@ -4,7 +4,9 @@ import { map } from 'rxjs/operators';
 import { Department } from '../models/department.interface';
 import firebase from 'firebase/app';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class DepartmentsService {
 
   constructor(

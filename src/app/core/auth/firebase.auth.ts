@@ -9,7 +9,9 @@ import { map, shareReplay, switchMap, tap } from "rxjs/operators";
 import { IUser, Roles } from "../user/user.model";
 import { UserService } from "../user/user.service";
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class FirebaseAuthService {
     private currentUser: BehaviorSubject<IUser> = new BehaviorSubject<IUser>(
         null
@@ -59,7 +61,7 @@ export class FirebaseAuthService {
             return false;
         }
         for (const role of allowedRoles) {
-            if (user.role === role && user.active) {
+            if (user.role.name === role && user.active) {
                 return true;
             }
         }

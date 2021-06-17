@@ -29,6 +29,6 @@ import { CategoriesService } from './services/categories.service';
     MatIconModule,
     MatButtonModule,
   ],
-  providers: [DepartmentsService, CategoriesService],
+  providers: [CategoriesService],
 })
 export class MaintenancesModule { }

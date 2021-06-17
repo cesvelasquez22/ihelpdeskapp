@@ -1,3 +1,4 @@
+<app-loading-overlay [isActive]="loading"></app-loading-overlay>
 <div class="w-full">
     <app-title-header [titleHeader]="titleHeader"></app-title-header>
     <div class="flex flex-col items-center justify-center md:my-8 w-full">
@@ -31,7 +32,7 @@
                     <mat-select formControlName="role">
                         <mat-option
                             *ngFor="let role of roles"
-                            [value]="role.name"
+                            [value]="role.uid"
                             >{{ role.name }}</mat-option
                         >
                     </mat-select>
