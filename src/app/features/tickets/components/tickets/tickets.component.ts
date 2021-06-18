@@ -28,6 +28,7 @@ export class TicketsComponent implements OnInit {
         overview: 'Listado',
         title: 'Tickets',
     };
+    loading = false;
 
     @ViewChild('matDrawer', { static: true }) matDrawer: MatDrawer;
     tickets: Ticket[] = [];
@@ -106,13 +107,18 @@ export class TicketsComponent implements OnInit {
     }
 
     getTickets() {
+        this.loading = true;
         this.ticketsService
             .getAllTickets()
             .pipe(takeUntil(this.unsubscribe$))
-            .subscribe((tickets) => {
-                this.ticketsCount = tickets.length;
-                if (tickets && tickets.length > 0) this.tickets = tickets;
-            });
+            .subscribe(
+                (tickets) => {
+                    this.ticketsCount = tickets.length;
+                    if (tickets && tickets.length > 0) this.tickets = tickets;
+                    this.loading = false;
+                },
+                (err) => (this.loading = false)
+            );
     }
 
     /**

@@ -16,11 +16,13 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { TicketPreviewComponent } from './components/ticket-preview/ticket-preview.component';
 
 @NgModule({
   declarations: [
     TicketsComponent,
-    TicketDetailComponent
+    TicketDetailComponent,
+    TicketPreviewComponent
   ],
   imports: [
     CommonModule,

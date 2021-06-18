@@ -1,11 +1,9 @@
-<!-- <portal-unificado-title-header [breadcrumb]="breadcrumb">
-</portal-unificado-title-header> -->
-
+<app-loading-overlay [isActive]="loading"></app-loading-overlay>
 <div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden min-h-full">
     <app-title-header [titleHeader]="titleHeader">
         <button class="ml-4" mat-flat-button [color]="'primary'" routerLink="/tickets/create">
-            <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
-            <span class="ml-2 mr-1">Agregar</span>
+            <mat-icon [svgIcon]="'mat_outline:send'"></mat-icon>
+            <span class="ml-2 mr-1">Nuevo ticket</span>
         </button>
     </app-title-header>
     <mat-drawer-container class="flex-auto h-full bg-card dark:bg-transparent" (backdropClick)="onBackdropClicked()">
