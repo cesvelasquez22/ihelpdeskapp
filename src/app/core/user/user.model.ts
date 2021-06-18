@@ -1,26 +1,18 @@
-export interface User
-{
-    id: string;
-    name: string;
-    email: string;
-    avatar?: string;
-    status?: string;
-}
-
 export interface IUser {
     uid?: string;
     email?: string;
     password?: string;
     displayName?: string;
     photoURL?: string;
-    role?: string;
+    role?: IUserRole;
     active?: boolean;
 }
 
 export interface IUserRole {
     uid: string;
-    role: string;
-    active: boolean;
+    name: string;
+    createdAt?: firebase.default.firestore.Timestamp;
+    active?: boolean;
 }
 
 export enum Roles {

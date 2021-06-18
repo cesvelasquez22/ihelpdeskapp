@@ -17,6 +17,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { FuseCardModule } from '@fuse/components/card';
 import { SignOutComponent } from './components/sign-out/sign-out.component';
 import { ConfirmationRequiredComponent } from './components/confirmation-required/confirmation-required.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { ConfirmationRequiredComponent } from './components/confirmation-require
     MatIconModule,
     MatInputModule,
     MatProgressSpinnerModule,
+    MatSelectModule,
   ]
 })
 export class AuthModule { }

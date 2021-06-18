@@ -12,9 +12,35 @@ export const defaultNavigation: FuseNavigationItem[] = [
     {
         id: 'tickets',
         title: 'Tickets',
-        type: 'basic',
+        type: 'collapsable',
         icon: 'mat_outline:sticky_note_2',
-        link: '/tickets',
+        children: [
+            {
+                id: 'tickets.my',
+                title: 'Mis tickets',
+                type: 'basic',
+                link: '/tickets/my',
+            },
+            {
+                id: 'tickets.to-me',
+                title: 'Asignados a mí',
+                type: 'basic',
+                link: '/tickets/to-me',
+            },
+            {
+                id: 'tickets.search',
+                title: 'Buscar tickets',
+                type: 'basic',
+                link: '/tickets/search',
+            },
+        ],
+    },
+    {
+        id: 'customers',
+        title: 'Clientes',
+        type: 'basic',
+        icon: 'mat_outline:groups',
+        link: '/customers',
     },
     {
         id: 'maintenances',
@@ -68,9 +94,35 @@ export const compactNavigation: FuseNavigationItem[] = [
     {
         id: 'tickets',
         title: 'Tickets',
-        type: 'basic',
+        type: 'collapsable',
         icon: 'mat_outline:sticky_note_2',
-        link: '/tickets',
+        children: [
+            {
+                id: 'tickets.my',
+                title: 'Mis tickets',
+                type: 'basic',
+                link: '/tickets/my',
+            },
+            {
+                id: 'tickets.to-me',
+                title: 'Asignados a mí',
+                type: 'basic',
+                link: '/tickets/to-me',
+            },
+            {
+                id: 'tickets.search',
+                title: 'Buscar tickets',
+                type: 'basic',
+                link: '/tickets/search',
+            },
+        ],
+    },
+    {
+        id: 'customers',
+        title: 'Clientes',
+        type: 'basic',
+        icon: 'mat_outline:groups',
+        link: '/customers',
     },
     {
         id: 'maintenances',
@@ -124,9 +176,35 @@ export const futuristicNavigation: FuseNavigationItem[] = [
     {
         id: 'tickets',
         title: 'Tickets',
-        type: 'basic',
+        type: 'collapsable',
         icon: 'mat_outline:sticky_note_2',
-        link: '/tickets',
+        children: [
+            {
+                id: 'tickets.my',
+                title: 'Mis tickets',
+                type: 'basic',
+                link: '/tickets/my',
+            },
+            {
+                id: 'tickets.to-me',
+                title: 'Asignados a mí',
+                type: 'basic',
+                link: '/tickets/to-me',
+            },
+            {
+                id: 'tickets.search',
+                title: 'Buscar tickets',
+                type: 'basic',
+                link: '/tickets/search',
+            },
+        ],
+    },
+    {
+        id: 'customers',
+        title: 'Clientes',
+        type: 'basic',
+        icon: 'mat_outline:groups',
+        link: '/customers',
     },
     {
         id: 'maintenances',
@@ -180,9 +258,35 @@ export const horizontalNavigation: FuseNavigationItem[] = [
     {
         id: 'tickets',
         title: 'Tickets',
-        type: 'basic',
+        type: 'collapsable',
         icon: 'mat_outline:sticky_note_2',
-        link: '/tickets',
+        children: [
+            {
+                id: 'tickets.my',
+                title: 'Mis tickets',
+                type: 'basic',
+                link: '/tickets/my',
+            },
+            {
+                id: 'tickets.to-me',
+                title: 'Asignados a mí',
+                type: 'basic',
+                link: '/tickets/to-me',
+            },
+            {
+                id: 'tickets.search',
+                title: 'Buscar tickets',
+                type: 'basic',
+                link: '/tickets/search',
+            },
+        ],
+    },
+    {
+        id: 'customers',
+        title: 'Clientes',
+        type: 'basic',
+        icon: 'mat_outline:groups',
+        link: '/customers',
     },
     {
         id: 'maintenances',

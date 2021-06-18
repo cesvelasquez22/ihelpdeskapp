@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, CanActivateChild, CanLoad, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { AuthService } from 'app/core/auth/auth.service';
 import { switchMap } from 'rxjs/operators';
 import { FirebaseAuthService } from '../firebase.auth';
 
@@ -14,7 +13,6 @@ export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad
      * Constructor
      */
     constructor(
-        private _authService: AuthService,
         private _router: Router,
         private firebaseAuthService: FirebaseAuthService,
     )

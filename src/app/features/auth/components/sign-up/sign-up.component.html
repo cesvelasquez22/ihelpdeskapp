@@ -76,7 +76,7 @@
                             matInput
                             [formControlName]="'displayName'">
                         <mat-error *ngIf="signUpForm.get('displayName').hasError('required')">
-                            Full name is required
+                            El nombre es requerido
                         </mat-error>
                     </mat-form-field>
 
@@ -123,32 +123,17 @@
                         </mat-error>
                     </mat-form-field>
 
-                    <!-- Company field -->
-                    <!-- <mat-form-field class="w-full">
-                        <mat-label>Company</mat-label>
-                        <input
-                            id="company-confirm"
-                            matInput
-                            [formControlName]="'company'">
-                    </mat-form-field> -->
-
-                    <!-- ToS and PP -->
-                    <!-- <div class="inline-flex items-end w-full mt-1.5">
-                        <mat-checkbox
-                            [color]="'primary'"
-                            [formControlName]="'agreements'">
-                            <span>I agree to the</span>
-                            <a
-                                class="ml-1 text-primary-500 hover:underline"
-                                [routerLink]="['./']">Terms of Service
-                            </a>
-                            <span>and</span>
-                            <a
-                                class="ml-1 text-primary-500 hover:underline"
-                                [routerLink]="['./']">Privacy Policy
-                            </a>
-                        </mat-checkbox>
-                    </div> -->
+                    <!-- Department field -->
+                    <mat-form-field class="w-full">
+                        <mat-label>Departamento</mat-label>
+                        <mat-select formControlName="department">
+                            <mat-option value="" selected class="hidden">--Seleccione--</mat-option>
+                            <mat-option *ngFor="let dept of departments" [value]="dept.uid">{{ dept.name }}</mat-option>
+                        </mat-select>
+                        <mat-error *ngIf="signUpForm.get('department').hasError('required')">
+                            El correo electrónico es requerido
+                        </mat-error>
+                    </mat-form-field>
 
                     <!-- Submit button -->
                     <button

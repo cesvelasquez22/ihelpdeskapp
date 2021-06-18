@@ -1,7 +1,8 @@
+import { IUserRole } from "app/core/user/user.model";
 export interface User {
     uid: string;
-    role: string;
-    displayName: string;
     email: string;
+    displayName: string;
+    role: IUserRole;
     active: boolean;
 }

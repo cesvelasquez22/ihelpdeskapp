@@ -35,7 +35,9 @@
     "@fullcalendar/timegrid": "4.4.2",
     "apexcharts": "3.26.0",
     "crypto-js": "3.3.0",
+    "firebase": "^7.0 || ^8.0",
     "highlight.js": "10.7.2",
+    "izitoast": "^1.4.0",
     "lodash-es": "4.17.21",
     "moment": "2.29.1",
     "ng-apexcharts": "1.5.9",
@@ -47,8 +49,7 @@
     "rxjs": "6.6.7",
     "tslib": "2.1.0",
     "web-animations-js": "2.3.2",
-    "zone.js": "0.11.4",
-    "firebase": "^7.0 || ^8.0"
+    "zone.js": "0.11.4"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "0.1102.9",

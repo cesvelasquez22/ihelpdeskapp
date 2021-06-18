@@ -14,6 +14,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
 import { CategoriesService } from './services/categories.service';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+
 
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
@@ -35,14 +39,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 
     // Material
     MatCardModule,
-        MatFormFieldModule,
-        MatInputModule,
-        MatButtonModule,
-        MatIconModule,
-        MatSelectModule,
-        MatDialogModule,
-    
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatIconModule,
+    MatSelectModule,
+    MatDialogModule,
   ],
-  providers: [DepartmentsService, CategoriesService],
+  providers: [CategoriesService],
 })
 export class MaintenancesModule { }

@@ -25,7 +25,7 @@
                             "
                         >
                             <th class="py-3 px-6 text-left">Nombre</th>
-                            <th class="py-3 px-6 text-left">Rol</th>
+                            <th class="py-3 px-6 text-left">Departamento</th>
                             <th class="py-3 px-6 text-left">Email</th>
                             <th class="py-3 px-6 text-center">Activo</th>
                             <th class="py-3 px-6 text-center">Acciones</th>
@@ -34,23 +34,23 @@
                     <tbody class="text-gray-600 text-sm font-light">
                         <tr
                             class="border-b border-gray-200 hover:bg-gray-100"
-                            *ngFor="let user of users"
+                            *ngFor="let customer of customers"
                         >
                             <td class="py-3 px-6 text-left whitespace-nowrap">
                                 <div class="flex items-center">
                                     <span class="font-medium">{{
-                                        user.displayName
+                                        customer.displayName
                                     }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-left">
                                 <div class="flex items-center">
-                                    <span>{{ user.role.name }}</span>
+                                    <span>{{ customer.department.name }}</span>
                                 </div>
                             </td>
                             <td class="py-3 px-6 text-center">
                                 <div class="flex items-center">
-                                    <span>{{ user.email }}</span>
+                                    <span>{{ customer.email }}</span>
                                 </div>
                             </td>
                             <td
@@ -64,7 +64,7 @@
                             >
                                 <div
                                     class="h-4 w-4 text-green-600"
-                                    *ngIf="user.active === true"
+                                    *ngIf="customer.active === true"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@
                                 </div>
                                 <div
                                     class="h-4 w-4 text-red-600"
-                                    *ngIf="user.active === false"
+                                    *ngIf="customer.active === false"
                                 >
                                     <svg
                                         xmlns="http://www.w3.org/2000/svg"
@@ -105,7 +105,7 @@
                                             hover:text-purple-500
                                             hover:scale-110
                                         "
-                                        [routerLink]="user.uid"
+                                        [routerLink]="customer.uid"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -122,7 +122,7 @@
                                         </svg>
                                     </div>
                                     <div
-                                        *ngIf="user.active === true"
+                                        *ngIf="customer.active === true"
                                         class="
                                             w-4
                                             mr-2
@@ -130,7 +130,7 @@
                                             hover:text-purple-500
                                             hover:scale-110
                                         "
-                                        (click)="changeUserStatus(user)"
+                                        (click)="changeCustomerStatus(customer)"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +147,7 @@
                                         </svg>
                                     </div>
                                     <div
-                                        *ngIf="user.active === false"
+                                        *ngIf="customer.active === false"
                                         class="
                                             w-4
                                             mr-2
@@ -155,7 +155,7 @@
                                             hover:text-purple-500
                                             hover:scale-110
                                         "
-                                        (click)="changeUserStatus(user)"
+                                        (click)="changeCustomerStatus(customer)"
                                     >
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
