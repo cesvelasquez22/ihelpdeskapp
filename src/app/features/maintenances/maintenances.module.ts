@@ -14,16 +14,13 @@ import { MatButtonModule } from '@angular/material/button';
 import { CategoriesComponent } from './components/categories/categories.component';
 import { CategoryDetailComponent } from './components/category-detail/category-detail.component';
 import { CategoriesService } from './services/categories.service';
+
+// MATERIAL
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-
-
 import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
