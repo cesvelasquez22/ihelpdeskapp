@@ -1,1 +1,19 @@
-<p>category-detail works!</p>
+<form [formGroup]="form" class="flex flex-col pb-4 overflow-hidden w-full">
+    <h1 mat-dialog-title>{{ title }} categoria</h1>
+    <mat-dialog-content>
+        <div class="flex flex-col">
+            <mat-form-field class="flex-auto gt-xs:pr-3">
+                <mat-label>Categorie</mat-label>
+                <input matInput formControlName="category" type="text">
+                <mat-error *ngIf="form.get('category').hasError('required') && form.get('category').dirty">
+                    Este campo es requerido
+                </mat-error>
+            </mat-form-field>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions class="flex items-center justify-end">
+        <button mat-stroked-button mat-dialog-close>Cancelar</button>
+        <button mat-flat-button [color]="'primary'" [mat-dialog-close]="true" (click)="save()"
+            [disabled]="form.invalid">Guardar</button>
+    </mat-dialog-actions>
+</form>
