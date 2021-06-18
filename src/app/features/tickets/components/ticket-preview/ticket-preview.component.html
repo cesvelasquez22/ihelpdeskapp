@@ -54,7 +54,7 @@
                     <div class="flex sm:items-center">
                         <mat-icon svgIcon="heroicons_outline:office-building"></mat-icon>
                         <div class="flex flex-col ml-2.5">
-                            <span class="font-medium">Departamento: </span>
+                            <span class="font-medium">Departamento solicitado: </span>
                             <div class="leading-6">{{ ticket.department.name }}</div>
                         </div>
                     </div>
@@ -87,6 +87,16 @@
                         <div class="flex flex-col ml-2.5">
                             <span class="font-medium">Cliente emisor: </span>
                             <div class="leading-6">{{ ticket.customer.displayName }}</div>
+                        </div>
+                    </div>
+                </ng-container>
+
+                <ng-container>
+                    <div class="flex sm:items-center">
+                        <mat-icon svgIcon="heroicons_outline:user-circle"></mat-icon>
+                        <div class="flex flex-col ml-2.5">
+                            <span class="font-medium">Departamento emisor: </span>
+                            <div class="leading-6">{{ ticket.customer.department }}</div>
                         </div>
                     </div>
                 </ng-container>

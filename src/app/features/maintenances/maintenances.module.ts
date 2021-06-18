@@ -43,6 +43,5 @@ import { MatSelectModule } from '@angular/material/select';
     MatSelectModule,
     MatDialogModule,
   ],
-  providers: [CategoriesService],
 })
 export class MaintenancesModule { }

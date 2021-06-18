@@ -35,6 +35,5 @@ import { MatDialogModule } from '@angular/material/dialog';
         MatSelectModule,
         MatDialogModule,
     ],
-    providers: [CustomersService],
 })
 export class CustomersModule {}

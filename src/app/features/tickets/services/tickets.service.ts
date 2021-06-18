@@ -3,7 +3,8 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { User } from 'app/features/users/models/user.interface';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { Ticket } from '../models/ticket.interface';
+import { Ticket, TicketPriority } from '../models/ticket.interface';
+import firebase from 'firebase/app';
 
 @Injectable()
 export class TicketsService {
@@ -31,6 +32,21 @@ export class TicketsService {
             );
     }
 
+    getAllPriorities() {
+        return this.afs
+            .collection('priorities')
+            .snapshotChanges()
+            .pipe(
+                map((snapshot) => {
+                    return snapshot.map((action) => {
+                        const data = action.payload.doc.data() as TicketPriority;
+                        data.uid = action.payload.doc.id;
+                        return data;
+                    });
+                })
+            );
+    }
+
     getAdminUsers() {
         return this.afs
             .collection('users', (ref) =>
@@ -47,5 +63,22 @@ export class TicketsService {
                     });
                 })
             );
+    }
+    
+    createTicket(ticket: Ticket) {
+        const docId = this.afs.createId();
+        const timestampDate = firebase.firestore.Timestamp.fromDate(ticket.createdAt as any);
+        return this.afs.collection('tickets').doc(docId).set({
+            uid: docId,
+            subject: ticket.subject,
+            description: ticket.description,
+            category: ticket.category,
+            priority: ticket.priority,
+            department: ticket.department,
+            customer: ticket.customer,
+            createdAt: timestampDate,
+            attendedBy: ticket.attendedBy,
+            ticketState: ticket.ticketState,
+        });
     }
 }

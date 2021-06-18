@@ -5,7 +5,9 @@ import { Categorie } from '../models/categorie.interface';
 import firebase from 'firebase/app';
 import { BehaviorSubject } from 'rxjs';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class CategoriesService {
     private categorieSubject = new BehaviorSubject<Categorie>(null);
     public categorie$ = this.categorieSubject.asObservable();
@@ -44,7 +46,7 @@ export class CategoriesService {
         const timestampDate = firebase.firestore.Timestamp.fromDate(categorie.createdAt as any);
         return this.afs.collection('categories').doc(docId).set({
             uid: docId,
-            category: categorie.category,
+            name: categorie.name,
             createdAt: timestampDate,
             active: categorie.active,
         });
@@ -53,7 +55,7 @@ export class CategoriesService {
     updateCategorie(categorie: Categorie) {
         const categorieDocRef = this.afs.collection('categories').doc(categorie.uid);
         return categorieDocRef.update({
-            category: categorie.category,
+            name: categorie.name,
             active: categorie.active,
         });
     }

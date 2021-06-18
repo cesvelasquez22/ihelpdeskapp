@@ -4,7 +4,9 @@ import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
 import { Customer } from '../models/customer.model';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class CustomersService {
     constructor(private afs: AngularFirestore, private http: HttpClient) {}
 

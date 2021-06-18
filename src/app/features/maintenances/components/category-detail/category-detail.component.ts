@@ -32,7 +32,7 @@ export class CategoryDetailComponent implements OnInit {
   ) {
     this.form = this.formBuilder.group({
       uid: [''],
-      category: ['', [Validators.required]],
+      name: ['', [Validators.required]],
       createdAt: [new Date()],
       active: [true],
       edit: [(this.data && this.data.editCategorie) ? true : false],
@@ -51,12 +51,12 @@ export class CategoryDetailComponent implements OnInit {
   clear() {
     this.form.reset();
     this.form.controls.uid.setValue('');
-    this.form.controls.category.setValue('');
+    this.form.controls.name.setValue('');
   }
 
   setCategorieInformation(categorie: Categorie) {
     this.form.controls.uid.setValue(categorie.uid);
-    this.form.controls.category.setValue(categorie.category);
+    this.form.controls.name.setValue(categorie.name);
     this.form.controls.active.setValue(categorie.active);
   }
 

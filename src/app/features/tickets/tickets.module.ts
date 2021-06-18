@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { TicketsRoutingModule } from './tickets.routing';
 import { TicketsComponent } from './components/tickets/tickets.component';
 import { TicketDetailComponent } from './components/ticket-detail/ticket-detail.component';
+import { TicketPreviewComponent } from './components/ticket-preview/ticket-preview.component';
 import { TicketsService } from './services/tickets.service';
 import { SharedModule } from 'app/shared/shared.module';
 
@@ -16,7 +17,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
-import { TicketPreviewComponent } from './components/ticket-preview/ticket-preview.component';
+import { MatSelectModule } from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { TicketPreviewComponent } from './components/ticket-preview/ticket-previ
     MatFormFieldModule,
     MatInputModule,
     MatProgressBarModule,
+    MatSelectModule,
   ],
   providers: [TicketsService],
 })

@@ -4,6 +4,7 @@ export interface Ticket {
     uid?: string;
     department: Department;
     subject: string;
+    description: string;
     customer: string;
     createdAt?: firebase.default.firestore.Timestamp;
     priority: TicketPriority;

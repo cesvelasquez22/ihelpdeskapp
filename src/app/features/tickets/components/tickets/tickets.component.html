@@ -71,7 +71,7 @@
                                 <div class="z-20 flex items-center justify-between px-6 py-4 md:px-8 cursor-pointer hover:bg-hover border-b"
                                     [ngClass]="{
                         'bg-primary-50 dark:bg-hover':
-                          selectedTicket && selectedTicket.codcliente === ticket.codcliente
+                          selectedTicket && selectedTicket.uid === ticket.uid
                       }">
                                     <div class="min-w-0 w-full" (click)="openPreview(ticket)">
                                         <div class="font-bold leading-5 truncate">
