@@ -1,52 +1,122 @@
-<div class="overflow-x-hidden min-w-screen min-h-screen">
+<!-- <portal-unificado-title-header [breadcrumb]="breadcrumb">
+</portal-unificado-title-header> -->
+
+<div class="absolute inset-0 flex flex-col min-w-0 overflow-hidden min-h-full">
     <app-title-header [titleHeader]="titleHeader">
         <button class="ml-4" mat-flat-button [color]="'primary'" routerLink="/tickets/create">
             <mat-icon [svgIcon]="'heroicons_outline:plus'"></mat-icon>
             <span class="ml-2 mr-1">Agregar</span>
         </button>
     </app-title-header>
-    <div class=" bg-gray-100 flex items-center justify-center font-sans overflow-hidden">
-        <div class="w-full lg:w-5/6">
-            <div class="bg-white shadow-md rounded my-6 overflow-x-auto">
-                <table class="min-w-max w-full table-auto">
-                    <thead>
-                        <tr class="bg-gray-200 text-gray-600 uppercase text-sm leading-normal">
-                            <th class="py-3 px-6 text-left">Departamento</th>
-                            <th class="py-3 px-6 text-left">Asunto</th>
-                            <th class="py-3 px-6 text-left">Cliente emisor</th>
-                            <th class="py-3 px-6 text-left">Categoria</th>
-                            <th class="py-3 px-6 text-left">Prioridad</th>
-                        </tr>
-                    </thead>
-                    <tbody class="text-gray-600 text-sm font-light">
-                        <tr class="border-b border-gray-200 hover:bg-gray-100" *ngFor="let ticket of tickets">
-                            <td class="py-3 px-6 text-left whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <span class="font-medium">{{ ticket.department.name }}</span>
+    <mat-drawer-container class="flex-auto h-full bg-card dark:bg-transparent" (backdropClick)="onBackdropClicked()">
+        <!-- Drawer -->
+        <mat-drawer class="w-full md:w-160 dark:bg-gray-900" [mode]="drawerMode" [opened]="false" [position]="'end'"
+            [disableClose]="true" #matDrawer>
+            <router-outlet></router-outlet>
+        </mat-drawer>
+
+        <mat-drawer-content class="flex flex-col border-t">
+
+            <!-- Main -->
+            <div class="flex-auto">
+                <!-- Header -->
+                <div
+                    class="flex flex-col sm:flex-row md:flex-col flex-auto justify-between pb-8 pt-2 px-6 md:px-8 border-b">
+                    <!-- Title -->
+                    <div>
+                        <div class="ml-0.5 font-medium text-secondary">
+                            <ng-container *ngIf="ticketsCount > 0">
+                                {{ ticketsCount }}
+                            </ng-container>
+                            {{
+                            ticketsCount
+                            | i18nPlural
+                            : {
+                            '=0': '0 Tickets',
+                            '=1': 'Ticket',
+                            other: 'Tickets'
+                            }
+                            }}
+                        </div>
+                    </div>
+
+                    <!-- Main actions -->
+                    <div class="flex items-center mt-4 sm:mt-0 md:mt-4">
+                        <!-- Search -->
+                        <div class="flex-auto">
+                            <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript w-full min-w-50">
+                                <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:search'"></mat-icon>
+                                <input type="search" matInput [formControl]="searchInputControl" [autocomplete]="'off'"
+                                    [placeholder]="'Buscar tickets'" />
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Customers list -->
+                <div class="relative">
+                    <div class="bottom-0" *ngIf="searching">
+                        <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
+                        <div class="m-h-full text-center p-2">
+                            <mat-icon class="icon-size-5 text-primary animate-spin-slow"
+                                [svgIcon]="'mat_outline:cached'"></mat-icon>
+                            Buscando...
+                        </div>
+                    </div>
+                    <ng-container *ngIf="tickets.length || searching; else noCustomers">
+                        <ng-container *ngFor="
+                    let ticket of tickets;
+                    let i = index;
+                    trackBy: trackByFn
+                  ">
+                            <ng-container *ngIf="!searching">
+                                <div class="z-20 flex items-center justify-between px-6 py-4 md:px-8 cursor-pointer hover:bg-hover border-b"
+                                    [ngClass]="{
+                        'bg-primary-50 dark:bg-hover':
+                          selectedTicket && selectedTicket.codcliente === ticket.codcliente
+                      }">
+                                    <div class="min-w-0 w-full" (click)="openPreview(ticket)">
+                                        <div class="font-bold leading-5 truncate">
+                                            ID del ticket:
+                                            <span class="font-medium">
+                                                {{ ticket.uid }}</span>
+                                        </div>
+                                        <div class="font-bold leading-5 truncate">
+                                            Asunto:
+                                            <span class="font-medium">
+                                                {{ ticket.subject }}</span>
+                                        </div>
+                                        <div class="font-medium leading-5 truncate text-secondary">
+                                            Cliente: {{ ticket.customer.displayName }}
+                                        </div>
+                                        <div class="font-medium leading-5 truncate text-secondary">
+                                            Estado: {{ ticket.ticketState }}
+                                        </div>
+                                    </div>
+                                    <div class="ml-2 -mt-2 -mr-3">
+                                        <button mat-icon-button [matMenuTriggerFor]="summaryMenu">
+                                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'">
+                                            </mat-icon>
+                                        </button>
+                                        <mat-menu #summaryMenu="matMenu">
+                                            <button mat-menu-item (click)="openPreview(ticket)">Vista previa</button>
+                                            <button mat-menu-item>Pasar al siguiente estado</button>
+                                            <button mat-menu-item>Asignar a</button>
+                                        </mat-menu>
+                                    </div>
                                 </div>
-                            </td>
-                            <td class="py-3 px-6 text-center">
-                                <div class="flex items-center">
-                                    <span>{{ ticket.subject }}</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-center">
-                                <div class="flex items-center">
-                                    <span>{{ ticket.customer }}</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-center">
-                                <div class="flex items-center">
-                                    <span>{{ ticket.category }}</span>
-                                </div>
-                            </td>
-                            <td class="py-3 px-6 text-center">
-                                <app-stars [count]="3" [value]="ticket.priority.value"></app-stars>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+                            </ng-container>
+                        </ng-container>
+                    </ng-container>
+
+                    <!-- No Customers -->
+                    <ng-template #noCustomers>
+                        <div class="p-8 sm:p-16 border-t text-4xl font-semibold tracking-tight text-center">
+                            No se encontraron resultados!
+                        </div>
+                    </ng-template>
+                </div>
             </div>
-        </div>
-    </div>
+        </mat-drawer-content>
+    </mat-drawer-container>
 </div>

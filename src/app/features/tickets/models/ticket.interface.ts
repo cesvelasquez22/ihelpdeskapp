@@ -8,7 +8,12 @@ export interface Ticket {
     createdAt?: firebase.default.firestore.Timestamp;
     priority: TicketPriority;
     category:TicketCategory;
-    ticketState: TicketState
+    ticketState: TicketState;
+    attendedBy: {
+        uid?: string;
+        name?: string;
+        email?: string;
+    }
 }
 
 export interface TicketPriority {
