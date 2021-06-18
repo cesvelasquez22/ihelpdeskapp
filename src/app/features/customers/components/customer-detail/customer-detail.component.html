@@ -1,1 +1,55 @@
-<p>customer-detail works!</p>
+<app-loading-overlay [isActive]="loading"></app-loading-overlay>
+<div class="w-full">
+    <app-title-header [titleHeader]="titleHeader"></app-title-header>
+    <div class="flex flex-col items-center justify-center md:my-8 w-full">
+        <form
+            class="
+                flex flex-col
+                p-8
+                pb-4
+                bg-card
+                rounded-2xl
+                shadow
+                overflow-hidden
+                sm:w-1/3
+            "
+            [formGroup]="customerForm"
+        >
+            <p class="text-lg font-medium mb-4">Datos generales</p>
+            <div class="flex flex-col">
+                <mat-form-field class="flex-auto">
+                    <mat-label>Nombre completo</mat-label>
+                    <input matInput formControlName="displayName" />
+                </mat-form-field>
+                <mat-form-field class="flex-auto">
+                    <mat-label>Correo electrónico</mat-label>
+                    <input matInput formControlName="email" />
+                </mat-form-field>
+            </div>
+            <div class="flex">
+                <mat-form-field class="flex-auto">
+                    <mat-label>Departamento</mat-label>
+                    <mat-select formControlName="department">
+                        <mat-option
+                            *ngFor="let department of departments"
+                            [value]="department.uid"
+                            >{{ department.name }}</mat-option
+                        >
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="flex items-center justify-end">
+                <button mat-stroked-button routerLink="..">Cancelar</button>
+                <button
+                    mat-flat-button
+                    [color]="'primary'"
+                    (click)="save()"
+                    class="ml-2"
+                    [disabled]="customerForm.invalid"
+                >
+                    Guardar
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

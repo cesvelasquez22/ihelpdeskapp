@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { AngularFirestore } from '@angular/fire/firestore';
-import { environment } from 'environments/environment';
 import { map } from 'rxjs/operators';
 import { Customer } from '../models/customer.model';
 
@@ -33,9 +32,14 @@ export class CustomersService {
     }
 
     updateCustomer(customer: Customer) {
-        return this.http.put<Customer>(
-            `${environment.CF_URL}/users-updateUser`,
-            customer
-        );
+        const customerDocRef = this.afs
+            .collection('customers')
+            .doc(customer.uid);
+        return customerDocRef.update({
+            name: customer.displayName,
+            email: customer.email,
+            department: customer.department,
+            active: customer.active,
+        });
     }
 }
