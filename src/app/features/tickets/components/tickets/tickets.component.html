@@ -99,7 +99,11 @@
                                         <mat-menu #summaryMenu="matMenu">
                                             <button mat-menu-item (click)="openPreview(ticket)">Vista previa</button>
                                             <button mat-menu-item>Pasar al siguiente estado</button>
-                                            <button mat-menu-item>Asignar a</button>
+                                            <button mat-menu-item [matMenuTriggerFor]="userAgents" >Asignar a</button>
+                                        </mat-menu>
+
+                                        <mat-menu #userAgents="matMenu">
+                                            <button *ngFor="let user of adminUsers" mat-menu-item (click)="assignTicketTo(user)">{{ user.displayName }}</button>
                                         </mat-menu>
                                     </div>
                                 </div>

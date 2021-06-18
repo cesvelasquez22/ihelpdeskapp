@@ -16,6 +16,7 @@ import {
 } from 'rxjs/operators';
 import { Ticket } from '../../models/ticket.interface';
 import { TicketsService } from '../../services/tickets.service';
+import { User } from 'app/features/users/models/user.interface';
 
 @Component({
     selector: 'app-tickets',
@@ -32,6 +33,7 @@ export class TicketsComponent implements OnInit {
 
     @ViewChild('matDrawer', { static: true }) matDrawer: MatDrawer;
     tickets: Ticket[] = [];
+    adminUsers: User[] = [];
     ticketsCount = 0;
     searching = false;
 
@@ -55,7 +57,7 @@ export class TicketsComponent implements OnInit {
 
     ngOnInit(): void {
         this.getTickets();
-
+        this.getAdminUsers();
         this.searchInputControl.valueChanges
             .pipe(
                 takeUntil(this.unsubscribe$),
@@ -121,6 +123,12 @@ export class TicketsComponent implements OnInit {
             );
     }
 
+    getAdminUsers() {
+        this.ticketsService
+            .getAdminUsers()
+            .subscribe((users) => (this.adminUsers = users));
+    }
+
     /**
      * On backdrop clicked
      */
@@ -144,5 +152,9 @@ export class TicketsComponent implements OnInit {
 
         // Mark for check
         this._changeDetectorRef.markForCheck();
+    }
+
+    assignTicketTo(user: User) {
+        console.log(user);
     }
 }
