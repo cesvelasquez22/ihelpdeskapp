@@ -26,6 +26,7 @@ export class TicketDetailComponent implements OnInit {
         module: 'Tickets',
         overview: 'Detalle del ticket',
         title: 'Tickets',
+        backRoute: '/tickets/my',
         back: true,
     };
     loading = false;
