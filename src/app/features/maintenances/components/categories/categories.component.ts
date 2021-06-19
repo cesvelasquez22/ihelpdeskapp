@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { IzitoastAlertService } from 'app/core/alerts/izitoast-alert.service';
 import { TitleHeader } from 'app/core/models/title-header.model';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
-import { Categorie } from '../../models/categorie.interface';
+import { Category } from '../../models/category.interface';
 import { CategoriesService } from '../../services/categories.service';
 import { CategoryDetailComponent } from '../category-detail/category-detail.component';
 
@@ -15,20 +16,21 @@ import { CategoryDetailComponent } from '../category-detail/category-detail.comp
 export class CategoriesComponent implements OnInit, OnDestroy {
     // Header
     titleHeader: TitleHeader = {
-        module: 'mantenimiento',
-        overview: 'Detalle de mantenimiento',
-        title: 'Categorias',
+        module: 'Mantenimientos',
+        overview: 'Detalle de la Categoría',
+        title: 'Categorías',
     };
 
     // PARAMS
     loading = false;
 
-    categories: Categorie[] = [];
+    categories: Category[] = [];
 
     private unsubscribe$ = new Subject<void>();
     constructor(
         private categoriesService: CategoriesService,
-        private dialog: MatDialog
+        private dialog: MatDialog,
+        private izitoastAlertService: IzitoastAlertService
     ) {}
 
     ngOnInit(): void {
@@ -42,26 +44,31 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     }
 
     getCategories() {
+        this.loading = true;
         this.categoriesService
             .getAllCategories()
             .pipe(takeUntil(this.unsubscribe$))
-            .subscribe((categories) => {
-                if (categories && categories.length > 0) {
-                    this.categories = categories;
-                }
-            });
+            .subscribe(
+                (categories) => {
+                    if (categories && categories.length > 0) {
+                        this.categories = categories;
+                    }
+                    this.loading = false;
+                },
+                (err) => (this.loading = false)
+            );
     }
 
     listenChangesCategories() {
-        this.categoriesService.categorie$
+        this.categoriesService.category$
             .pipe(takeUntil(this.unsubscribe$))
-            .subscribe((categorie) => {
-                if (categorie && categorie !== null) {
-                    if (categorie.edit) {
-                        console.log(categorie);
-                        this.updateCategorie(categorie);
+            .subscribe((category) => {
+                if (category && category !== null) {
+                    if (category.edit) {
+                        console.log(category);
+                        this.updateCategory(category);
                     } else {
-                        this.addCategorie(categorie);
+                        this.addCategory(category);
                     }
                 }
             });
@@ -70,45 +77,53 @@ export class CategoriesComponent implements OnInit, OnDestroy {
     openDialog(element?, editar?) {
         this.dialog.open(CategoryDetailComponent, {
             data: {
-                editCategorie: editar ? element : null,
+                editCategory: editar ? element : null,
             },
             width: 'auto',
             disableClose: false,
         });
     }
 
-    addCategorie(categorie: Categorie) {
+    addCategory(category: Category) {
         this.loading = true;
         this.categoriesService
-            .createCategorie(categorie)
+            .createCategory(category)
             .then(() => {
-                console.info('Categorie created!');
                 this.loading = false;
+                this.izitoastAlertService.CustomSuccessAlert(
+                    'Se ha creado la categoría!'
+                );
             })
             .catch((err) => {
-                console.error('There was an error trying create the categorie', err);
                 this.loading = false;
+                this.izitoastAlertService.CustomErrorAlert(
+                    'Hubo un error al crear la categoría'
+                );
             });
     }
 
-    updateCategorie(categorie: Categorie) {
+    updateCategory(category: Category) {
         this.loading = true;
-        categorie.active = !categorie.active;
+        category.active = !category.active;
         this.categoriesService
-            .updateCategorie(categorie)
+            .updateCategory(category)
             .then(() => {
-                console.info('Categorie updated!');
                 this.loading = false;
+                this.izitoastAlertService.CustomSuccessAlert(
+                    'Se ha actualizado la categoría!'
+                );
             })
             .catch((err) => {
-                console.error('There was an error trying update the categorie', err);
                 this.loading = false;
+                this.izitoastAlertService.CustomErrorAlert(
+                    'Hubo un error al actualizando la categoría'
+                );
             });
     }
 
-    async deleteCategorie(uid: string) {
+    async deleteCategory(uid: string) {
         this.loading = true;
-        await this.categoriesService.deleteCategorie(uid);
+        await this.categoriesService.deleteCategory(uid);
         this.loading = false;
     }
 }

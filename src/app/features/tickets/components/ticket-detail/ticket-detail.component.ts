@@ -7,7 +7,7 @@ import { TitleHeader } from 'app/core/models/title-header.model';
 import { IUser } from 'app/core/user/user.model';
 import { Customer } from 'app/features/customers/models/customer.model';
 import { CustomersService } from 'app/features/customers/services/customers.service';
-import { Categorie } from 'app/features/maintenances/models/categorie.interface';
+import { Category } from 'app/features/maintenances/models/category.interface';
 import { Department } from 'app/features/maintenances/models/department.interface';
 import { CategoriesService } from 'app/features/maintenances/services/categories.service';
 import { DepartmentsService } from 'app/features/maintenances/services/departments.service';
@@ -34,7 +34,7 @@ export class TicketDetailComponent implements OnInit {
     // RELATED TO FORM
     form: FormGroup;
     departments: Department[] = [];
-    categories: Categorie[] = [];
+    categories: Category[] = [];
     priorities: TicketPriority[] = [];
     currentUser: IUser;
     currentCustomer: Customer;
@@ -76,7 +76,7 @@ export class TicketDetailComponent implements OnInit {
 
     getTicketInfo() {
         const ticketInfo$: Observable<
-            [Categorie[], Department[], TicketPriority[], Customer]
+            [Category[], Department[], TicketPriority[], Customer]
         > = combineLatest(
             this.categoriesService.getAllCategories(),
             this.departmentsService.getAllDepartments(),

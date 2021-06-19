@@ -1,11 +1,11 @@
 <form [formGroup]="form" class="flex flex-col pb-4 overflow-hidden w-full">
-    <h1 mat-dialog-title>{{ title }} categoria</h1>
+    <h1 mat-dialog-title>{{ title }} categoría</h1>
     <mat-dialog-content>
         <div class="flex flex-col">
             <mat-form-field class="flex-auto gt-xs:pr-3">
-                <mat-label>Categorie</mat-label>
-                <input matInput formControlName="category" type="text">
-                <mat-error *ngIf="form.get('category').hasError('required') && form.get('category').dirty">
+                <mat-label>Categoría</mat-label>
+                <input matInput formControlName="name" type="text">
+                <mat-error *ngIf="form.get('name').hasError('required') && form.get('name').dirty">
                     Este campo es requerido
                 </mat-error>
             </mat-form-field>

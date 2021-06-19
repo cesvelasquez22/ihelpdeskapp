@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TitleHeader } from 'app/core/models/title-header.model';
-import { Categorie } from '../../models/categorie.interface';
+import { Category } from '../../models/category.interface';
 import { CategoriesService } from '../../services/categories.service';
 @Component({
   selector: 'app-category-detail',
@@ -35,16 +35,16 @@ export class CategoryDetailComponent implements OnInit {
       name: ['', [Validators.required]],
       createdAt: [new Date()],
       active: [true],
-      edit: [(this.data && this.data.editCategorie) ? true : false],
+      edit: [(this.data && this.data.editCategory) ? true : false],
     })
    }
 
   ngOnInit(): void {
-    this.title = 'Nuevo';
+    this.title = 'Agregar';
 
-    if (this.data && this.data.editCategorie !== null) {
+    if (this.data && this.data.editCategory !== null) {
       this.title = 'Editar';
-      this.setCategorieInformation(this.data.editCategorie);
+      this.setCategorieInformation(this.data.editCategory);
     }
   }
 
@@ -54,16 +54,16 @@ export class CategoryDetailComponent implements OnInit {
     this.form.controls.name.setValue('');
   }
 
-  setCategorieInformation(categorie: Categorie) {
+  setCategorieInformation(categorie: Category) {
     this.form.controls.uid.setValue(categorie.uid);
     this.form.controls.name.setValue(categorie.name);
     this.form.controls.active.setValue(categorie.active);
   }
 
   save() {
-    this.categoriesService.categorie = this.form.value;
+    this.categoriesService.category = this.form.value;
     this.dialogRef.close(this.form.value);
-    this.categoriesService.categorie = null;
+    this.categoriesService.category = null;
     this.clear();
   }
 

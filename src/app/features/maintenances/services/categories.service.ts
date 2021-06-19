@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { map } from 'rxjs/operators';
-import { Categorie } from '../models/categorie.interface';
+import { Category } from '../models/category.interface';
 import firebase from 'firebase/app';
 import { BehaviorSubject } from 'rxjs';
 
@@ -9,12 +9,12 @@ import { BehaviorSubject } from 'rxjs';
     providedIn: 'root'
 })
 export class CategoriesService {
-    private categorieSubject = new BehaviorSubject<Categorie>(null);
-    public categorie$ = this.categorieSubject.asObservable();
+    private categorieSubject = new BehaviorSubject<Category>(null);
+    public category$ = this.categorieSubject.asObservable();
 
     constructor(private afs: AngularFirestore) {}
 
-    set categorie(categorie: Categorie) {
+    set category(categorie: Category) {
         this.categorieSubject.next(categorie);
     }
 
@@ -25,7 +25,7 @@ export class CategoriesService {
             .pipe(
                 map((snapshot) => {
                     return snapshot.map((action) => {
-                        const data = action.payload.doc.data() as Categorie;
+                        const data = action.payload.doc.data() as Category;
                         data.uid = action.payload.doc.id;
                         return data;
                     });
@@ -33,34 +33,34 @@ export class CategoriesService {
             );
     }
 
-    getCategorieByUid(uid: string) {
+    getCategoryByUid(uid: string) {
         return this.afs
             .collection('categories')
             .doc(uid)
             .valueChanges()
-            .pipe(map((categorie: any) => categorie as Categorie));
+            .pipe(map((categorie: any) => categorie as Category));
     }
 
-    createCategorie(categorie: Categorie) {
+    createCategory(category: Category) {
         const docId = this.afs.createId();
-        const timestampDate = firebase.firestore.Timestamp.fromDate(categorie.createdAt as any);
+        const timestampDate = firebase.firestore.Timestamp.fromDate(category.createdAt as any);
         return this.afs.collection('categories').doc(docId).set({
             uid: docId,
-            name: categorie.name,
+            name: category.name,
             createdAt: timestampDate,
-            active: categorie.active,
+            active: category.active,
         });
     }
 
-    updateCategorie(categorie: Categorie) {
-        const categorieDocRef = this.afs.collection('categories').doc(categorie.uid);
-        return categorieDocRef.update({
-            name: categorie.name,
-            active: categorie.active,
+    updateCategory(category: Category) {
+        const categoryDocRef = this.afs.collection('categories').doc(category.uid);
+        return categoryDocRef.update({
+            name: category.name,
+            active: category.active,
         });
     }
 
-    deleteCategorie(uid: string) {
+    deleteCategory(uid: string) {
       const customerDocRef = this.afs.collection('categories').doc(uid);
       return customerDocRef.delete();
     }
