@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, OnInit, ViewChild} from '@angular/core';
 import { Location } from '@angular/common';
 import { FormControl } from '@angular/forms';
 import { MatDrawer } from '@angular/material/sidenav';
@@ -23,7 +23,7 @@ import { User } from 'app/features/users/models/user.interface';
     templateUrl: './tickets.component.html',
     styleUrls: ['./tickets.component.scss'],
 })
-export class TicketsComponent implements OnInit {
+export class TicketsComponent implements OnInit, OnDestroy {
     titleHeader: TitleHeader = {
         module: 'Tickets',
         overview: 'Listado',
@@ -108,6 +108,11 @@ export class TicketsComponent implements OnInit {
             });
     }
 
+    ngOnDestroy() {
+        this.unsubscribe$.next();
+        this.unsubscribe$.complete();
+    }
+
     getTickets() {
         this.loading = true;
         this.ticketsService
@@ -156,5 +161,9 @@ export class TicketsComponent implements OnInit {
 
     assignTicketTo(user: User) {
         console.log(user);
+    }
+
+    currentState(key: string) {
+        return this.ticketsService.currentState(key).label;
     }
 }

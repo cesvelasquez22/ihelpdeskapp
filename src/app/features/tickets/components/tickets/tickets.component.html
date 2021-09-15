@@ -88,7 +88,7 @@
                                             Cliente: {{ ticket.customer.displayName }}
                                         </div>
                                         <div class="font-medium leading-5 truncate text-secondary">
-                                            Estado: {{ ticket.ticketState }}
+                                            Estado: {{ currentState(ticket.ticketState) }}
                                         </div>
                                     </div>
                                     <div class="ml-2 -mt-2 -mr-3">
@@ -99,11 +99,12 @@
                                         <mat-menu #summaryMenu="matMenu">
                                             <button mat-menu-item (click)="openPreview(ticket)">Vista previa</button>
                                             <button mat-menu-item>Pasar al siguiente estado</button>
-                                            <button mat-menu-item [matMenuTriggerFor]="userAgents" >Asignar a</button>
+                                            <button mat-menu-item [matMenuTriggerFor]="userAgents">Asignar a</button>
                                         </mat-menu>
 
                                         <mat-menu #userAgents="matMenu">
-                                            <button *ngFor="let user of adminUsers" mat-menu-item (click)="assignTicketTo(user)">{{ user.displayName }}</button>
+                                            <button *ngFor="let user of adminUsers" mat-menu-item
+                                                (click)="assignTicketTo(user)">{{ user.displayName }}</button>
                                         </mat-menu>
                                     </div>
                                 </div>

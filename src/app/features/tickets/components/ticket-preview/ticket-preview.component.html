@@ -1,3 +1,4 @@
+<app-loading-overlay [isActive]="loading"></app-loading-overlay>
 <div class="flex flex-col w-full" *ngIf="ticket$ | async as ticket">
     <!-- Header -->
     <div class="relative w-full h-40 sm:h-48 px-8 sm:px-12 bg-accent-100 dark:bg-accent-700">
@@ -23,11 +24,11 @@
                 </div>
                 <!-- Actions -->
                 <div class="flex items-center ml-auto mb-1">
-                    <button mat-stroked-button>
+                    <button *ngIf="ticket.ticketState !== 'qat'" mat-stroked-button (click)="updateStatus(ticket, nextState.key)">
                         <mat-icon class="icon-size-5" [color]="'primary'" [svgIcon]="'mat_outline:double_arrow'"></mat-icon>
-                        <span class="ml-2">Pasar a </span>
+                        <span class="ml-2">Pasar a {{ nextTicketState(ticket.ticketState) }}</span>
                     </button>
-                    <button class="ml-4" mat-flat-button [color]="'primary'">
+                    <button *ngIf="ticket.ticketState === 'qat'" class="ml-4" mat-flat-button [color]="'primary'">
                         <mat-icon [svgIcon]="'mat_outline:check_circle_outline'"></mat-icon>
                         <span class="ml-2 mr-1">Resolver ticket</span>
                     </button>
@@ -39,7 +40,7 @@
                 {{ ticket.subject }}
             </div>
             <div class="mt-3 text-md font-bold truncate">
-                Estado actual: <span class="font-medium">{{ ticket.ticketState }}</span>
+                Estado actual: <span class="font-medium">{{ currentState(ticket.ticketState) }}</span>
             </div>
             <div class="mt-3 text-md font-bold truncate">
                 ID del ticket: <span class="font-medium">{{ ticket.uid }}</span>

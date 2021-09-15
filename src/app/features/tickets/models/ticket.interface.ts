@@ -8,8 +8,8 @@ export interface Ticket {
     customer: string;
     createdAt?: firebase.default.firestore.Timestamp;
     priority: TicketPriority;
-    category:TicketCategory;
-    ticketState: TicketState;
+    category: TicketCategory;
+    ticketState: string;
     attendedBy: {
         uid?: string;
         name?: string;
@@ -26,8 +26,8 @@ export interface TicketPriority {
 export enum TicketState {
     new = 'Nuevo',
     inProgress = 'En progreso',
-    qat = 'QAT',
-    done = 'Terminado'
+    qat = 'Revisión del cliente',
+    done = 'Resuelto'
 }
 
 export enum TicketCategory {

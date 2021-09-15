@@ -66,7 +66,7 @@ export class TicketDetailComponent implements OnInit {
             customer: [''],
             createdAt: [new Date()],
             attendedBy: [''],
-            ticketState: [TicketState.new],
+            ticketState: ['new'],
         });
     }
 
