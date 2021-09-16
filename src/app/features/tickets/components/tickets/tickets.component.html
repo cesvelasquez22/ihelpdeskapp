@@ -9,7 +9,7 @@
     <mat-drawer-container class="flex-auto h-full bg-card dark:bg-transparent" (backdropClick)="onBackdropClicked()">
         <!-- Drawer -->
         <mat-drawer class="w-full md:w-160 dark:bg-gray-900" [mode]="drawerMode" [opened]="false" [position]="'end'"
-            [disableClose]="true" #matDrawer>
+                    [disableClose]="true" #matDrawer>
             <router-outlet></router-outlet>
         </mat-drawer>
 
@@ -28,12 +28,12 @@
                             </ng-container>
                             {{
                             ticketsCount
-                            | i18nPlural
-                            : {
-                            '=0': '0 Tickets',
-                            '=1': 'Ticket',
-                            other: 'Tickets'
-                            }
+                                | i18nPlural
+                                : {
+                                    '=0': '0 Tickets',
+                                    '=1': 'Ticket',
+                                    other: 'Tickets'
+                                }
                             }}
                         </div>
                     </div>
@@ -44,8 +44,8 @@
                         <div class="flex-auto">
                             <mat-form-field class="fuse-mat-dense fuse-mat-no-subscript w-full min-w-50">
                                 <mat-icon class="icon-size-5" matPrefix [svgIcon]="'heroicons_solid:search'"></mat-icon>
-                                <input type="search" matInput [formControl]="searchInputControl" [autocomplete]="'off'"
-                                    [placeholder]="'Buscar tickets'" />
+                                <input type="search" matInput [formControl]="filterControl" [autocomplete]="'off'"
+                                       [placeholder]="'Buscar tickets'"/>
                             </mat-form-field>
                         </div>
                     </div>
@@ -57,57 +57,63 @@
                         <mat-progress-bar [mode]="'indeterminate'"></mat-progress-bar>
                         <div class="m-h-full text-center p-2">
                             <mat-icon class="icon-size-5 text-primary animate-spin-slow"
-                                [svgIcon]="'mat_outline:cached'"></mat-icon>
+                                      [svgIcon]="'mat_outline:cached'"></mat-icon>
                             Buscando...
                         </div>
                     </div>
-                    <ng-container *ngIf="tickets.length || searching; else noCustomers">
-                        <ng-container *ngFor="
+                    <ng-container *ngIf="filteredInfo$ | async as tickets">
+                        <ng-container *ngIf="tickets.length || searching; else noCustomers">
+                            <ng-container *ngFor="
                     let ticket of tickets;
                     let i = index;
                     trackBy: trackByFn
                   ">
-                            <ng-container *ngIf="!searching">
-                                <div class="z-20 flex items-center justify-between px-6 py-4 md:px-8 cursor-pointer hover:bg-hover border-b"
-                                    [ngClass]="{
+                                <ng-container *ngIf="!searching">
+                                    <div
+                                        class="z-20 flex items-center justify-between px-6 py-4 md:px-8 cursor-pointer hover:bg-hover border-b"
+                                        [ngClass]="{
                         'bg-primary-50 dark:bg-hover':
                           selectedTicket && selectedTicket.uid === ticket.uid
                       }">
-                                    <div class="min-w-0 w-full" (click)="openPreview(ticket)">
-                                        <div class="font-bold leading-5 truncate">
-                                            ID del ticket:
-                                            <span class="font-medium">
+                                        <div class="min-w-0 w-full" (click)="openPreview(ticket)">
+                                            <div class="font-bold leading-5 truncate">
+                                                ID del ticket:
+                                                <span class="font-medium">
                                                 {{ ticket.uid }}</span>
-                                        </div>
-                                        <div class="font-bold leading-5 truncate">
-                                            Asunto:
-                                            <span class="font-medium">
+                                            </div>
+                                            <div class="font-bold leading-5 truncate">
+                                                Asunto:
+                                                <span class="font-medium">
                                                 {{ ticket.subject }}</span>
+                                            </div>
+                                            <div class="font-medium leading-5 truncate text-secondary">
+                                                Cliente: {{ ticket.customer.displayName }}
+                                            </div>
+                                            <div class="font-medium leading-5 truncate text-secondary">
+                                                Estado: {{ currentState(ticket.ticketState) }}
+                                            </div>
                                         </div>
-                                        <div class="font-medium leading-5 truncate text-secondary">
-                                            Cliente: {{ ticket.customer.displayName }}
-                                        </div>
-                                        <div class="font-medium leading-5 truncate text-secondary">
-                                            Estado: {{ currentState(ticket.ticketState) }}
-                                        </div>
-                                    </div>
-                                    <div class="ml-2 -mt-2 -mr-3">
-                                        <button mat-icon-button [matMenuTriggerFor]="summaryMenu">
-                                            <mat-icon class="icon-size-5" [svgIcon]="'heroicons_solid:dots-vertical'">
-                                            </mat-icon>
-                                        </button>
-                                        <mat-menu #summaryMenu="matMenu">
-                                            <button mat-menu-item (click)="openPreview(ticket)">Vista previa</button>
-                                            <button mat-menu-item>Pasar al siguiente estado</button>
-                                            <button mat-menu-item [matMenuTriggerFor]="userAgents">Asignar a</button>
-                                        </mat-menu>
+                                        <div class="ml-2 -mt-2 -mr-3">
+                                            <button mat-icon-button [matMenuTriggerFor]="summaryMenu">
+                                                <mat-icon class="icon-size-5"
+                                                          [svgIcon]="'heroicons_solid:dots-vertical'">
+                                                </mat-icon>
+                                            </button>
+                                            <mat-menu #summaryMenu="matMenu">
+                                                <button mat-menu-item (click)="openPreview(ticket)">Vista previa
+                                                </button>
+                                                <button mat-menu-item>Pasar al siguiente estado</button>
+                                                <button mat-menu-item [matMenuTriggerFor]="userAgents">Asignar a
+                                                </button>
+                                            </mat-menu>
 
-                                        <mat-menu #userAgents="matMenu">
-                                            <button *ngFor="let user of adminUsers" mat-menu-item
-                                                (click)="assignTicketTo(user)">{{ user.displayName }}</button>
-                                        </mat-menu>
+                                            <mat-menu #userAgents="matMenu">
+                                                <button *ngFor="let user of adminUsers" mat-menu-item
+                                                        (click)="assignTicketTo(user)">{{ user.displayName }}</button>
+                                            </mat-menu>
+                                        </div>
                                     </div>
-                                </div>
+                                </ng-container>
                             </ng-container>
                         </ng-container>
                     </ng-container>
