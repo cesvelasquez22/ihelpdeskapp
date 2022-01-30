@@ -26,10 +26,9 @@ export class AdminGuard implements CanActivate {
             Roles.customer,
         ];
         return this.firebaseAuthService.user$.pipe(
+            tap(console.log),
             map((user) =>
                 user && this.firebaseAuthService.checkAuthorization(user, allowedRoles)
-                    ? true
-                    : false
             ),
             tap((hasAllowedRole) => {
                 if (!hasAllowedRole) {

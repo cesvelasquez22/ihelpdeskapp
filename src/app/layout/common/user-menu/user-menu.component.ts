@@ -3,6 +3,7 @@ import { BooleanInput } from '@angular/cdk/coercion';
 import { Subject } from 'rxjs';
 import { IUser } from 'app/core/user/user.model';
 import { FirebaseAuthService } from 'app/core/auth/firebase.auth';
+import {tap} from 'rxjs/operators';
 
 @Component({
     selector       : 'user-menu',
@@ -16,7 +17,6 @@ export class UserMenuComponent implements OnInit, OnDestroy
     static ngAcceptInputType_showAvatar: BooleanInput;
 
     @Input() showAvatar: boolean = true;
-    currentUser: IUser;
 
     private _unsubscribeAll: Subject<any> = new Subject<any>();
 
@@ -24,7 +24,7 @@ export class UserMenuComponent implements OnInit, OnDestroy
      * Constructor
      */
     constructor(
-        private firebaseAuthService: FirebaseAuthService,
+        public firebaseAuthService: FirebaseAuthService,
     )
     {
     }
@@ -38,8 +38,6 @@ export class UserMenuComponent implements OnInit, OnDestroy
      */
     ngOnInit(): void
     {
-        // Get current user
-        this.firebaseAuthService.getCurrentUser().then((user) => (this.currentUser = user))
     }
 
     /**

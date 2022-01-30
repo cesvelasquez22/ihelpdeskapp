@@ -4,7 +4,7 @@ import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestore } from "@angular/fire/firestore";
 import { Router } from "@angular/router";
 import { environment } from "environments/environment";
-import { BehaviorSubject, of } from "rxjs";
+import {BehaviorSubject, Observable, of} from 'rxjs';
 import { map, shareReplay, switchMap, tap } from "rxjs/operators";
 import { IUser, Roles } from "../user/user.model";
 import { UserService } from "../user/user.service";
@@ -24,11 +24,11 @@ export class FirebaseAuthService {
         private router: Router,
         private http: HttpClient,
     ) {
-        this.getUser();
+        this.user$ = this.getUser();
     }
 
-    private getUser(): void {
-        this.user$ = this.afAuth.authState.pipe(
+    private getUser(): Observable<IUser> {
+        return this.afAuth.authState.pipe(
             switchMap((user) => {
                 if (user) {
                     return this.afs
@@ -41,7 +41,7 @@ export class FirebaseAuthService {
                         );
                 } else {
                     this.currentUser.next(null);
-                    return of(null);
+                    return of<IUser>(null);
                 }
             }),
             shareReplay(1, 3000)
